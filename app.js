@@ -1,9 +1,35 @@
 // e-commerce site
-async function fetchApi() {
-    const fetch_data = await fetch(`https://fakestoreapi.com/products/category/electronics`)
-    const data = await fetch_data.json()
+const api = `https://fakestoreapi.com`
+async function categoryApi() {
+    const fetch_api = await fetch(`${api}/products/categories`)
+    const data = await fetch_api.json()
     console.log(data);
-    // document.getElementById("article").innerHTML = `<img src="${data[1].images[0]}" alt="" />`
-    
+    const category_div = document.getElementById("category_div")
+    for (let i = 0; i < data.length; i++) {
+        category_div.innerHTML += `<a class="category">${data[i]}</a>`
+        
+    }
 }
-fetchApi()
+categoryApi()
+async function productApi() {
+    const fetch_api = await fetch(`${api}/products`)
+    const data = await fetch_api.json()
+    console.log(data);
+    const products_div = document.getElementById("products_div")
+    for (let i = 0; i < data.length; i++) {
+        products_div.innerHTML += `<a class="product">
+        <div class=>
+        <div class="product_image"><img src="${data[i].image}"/></div>
+        <div>
+        <div>
+        ${data[i].title}
+        </div>
+        <div>$${data[i].price}</div>
+        <div>${data[i].description}</div>
+        </div>
+        </div>
+        </a>`
+        
+    }
+}
+productApi()
