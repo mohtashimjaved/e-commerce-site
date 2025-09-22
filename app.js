@@ -29,6 +29,7 @@ async function categoryApi() {
         console.log(categoryProductData);
         for (let i = 0; i < categoryproducts.length; i++) {
             categoryProductsDiv.innerHTML += `<a class="CategoryProducts">
+            <div class="product_inner">
             <div class="product_image"><img src="${categoryproducts[i].images[0]}"/></div>
             <div>
             <div>
@@ -54,7 +55,7 @@ async function productApi() {
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
         products_div.innerHTML += `<a class="product" href="">
-        <div class=>
+        <div class="product_inner" >
         <div class="product_image"><img src="${products[i].images[0]}"/></div>
         <div>
         <div>
@@ -69,3 +70,34 @@ async function productApi() {
     }
 }
 productApi()
+
+// mouse scroll
+const scrollableContainer = document.getElementById("category_div");
+let isDragging = false;
+let startX;
+let scrollLeft;
+
+scrollableContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - scrollableContainer.offsetLeft;
+    scrollLeft = scrollableContainer.scrollLeft;
+    scrollableContainer.style.cursor = 'grabbing';
+});
+
+scrollableContainer.addEventListener('mouseleave', () => {
+    isDragging = false;
+    scrollableContainer.style.cursor = 'grab';
+});
+
+scrollableContainer.addEventListener('mouseup', () => {
+    isDragging = false;
+    scrollableContainer.style.cursor = 'grab';
+});
+
+scrollableContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollableContainer.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    scrollableContainer.scrollLeft = scrollLeft - walk;
+});
