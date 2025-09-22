@@ -48,7 +48,7 @@ async function categoryApi() {
 }
 categoryApi()
 async function productApi() {
-    const fetch_api = await fetch(`${api}/products?limit=50&skip=0`)
+    const fetch_api = await fetch(`${api}/products?limit=40&skip=77`)
     const data = await fetch_api.json()
     console.log(data);
     const products = data.products
@@ -57,12 +57,13 @@ async function productApi() {
         products_div.innerHTML += `<a class="product" href="">
         <div class="product_inner" >
         <div class="product_image"><img src="${products[i].images[0]}"/></div>
-        <div>
-        <div>
+        <div class="product_details">
+        <div class="product_price">$${products[i].price}<i class="fa-solid fa-cart-plus"></i></div>
+        <div class="product_title">
         ${products[i].title}
         </div>
-        <div>$${products[i].price}</div>
-        <div>${products[i].description}</div>
+        <div class="product_descp">${products[i].description}</div>
+        <div class="product_rating">Rating ${products[i].rating}</div>
         </div>
         </div>
         </a>`
