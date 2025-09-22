@@ -29,8 +29,8 @@
                     </div>
                     <div class="offcanvas-body">
                         <div class="navbar-nav justify-content-end flex-grow-1 pe-3 menu">
-                            <a class="nav-link nav_items _active" aria-current="page" href="#">Home</a>
-                            <a class="nav-link nav_items" href="#">All Products</a>
+                            <a class="nav-link nav_items _active" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-link nav_items" href="">All products</a>
                             <a class="nav-link nav_items" href="#">Contact Us</a>
                         </div>
                     </div>
@@ -38,9 +38,27 @@
             </div>
         </nav>
     </header>
-    <div class="banner_image"><img src="./assets/banner.jpg" alt=""></div>
+    <div id="carouselExampleIndicators" class="carousel slide  _carousel" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./assets/banner1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/banner2.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
     <article>
-        <div id="category_div">
+        <div class="category_main">
+            <div class="category_heading">All Categories</div>
+            <div id="category_div">
+            </div>
         </div>
         <div class="products_main">
             <div class="products_heading">
@@ -48,8 +66,60 @@
             </div>
             <div id="products_div"></div>
         </div>
-
     </article>
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-section links-section">
+                <div class="link-group">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="./category.html?name=Laptops">Laptops</a></li>
+                        <li><a href="./category.html?name=Motorcycle">Motorcycle</a></li>
+                        <li><a href="./category.html?name=Fragrances">Fragrances</a></li>
+                        <li><a href="./category.html?name=Mens%20Watches">Watches</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Trending Searches</h4>
+                    <ul>
+                        <li><a href="./category.html?name=Smartphones">Smartphones</a></li>
+                        <li><a href="./category.html?name=Tablets">Tablets</a></li>
+                        <li><a href="./category.html?name=Vehicle">Vehicle</a></li>
+                        <li><a href="./category.html?name=Beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact US</a></li>
+                        <li><a href="#">About Developer</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-section social-newsletter-section">
+                <div class="social-media">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+        <div class="footer-bottom">
+            <div class="copyright-legal">
+                <span>&copy; 2025 Live Currency. All rights reserved.</span>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="design-credit">
+                <span>Design by Mohtashim Javed</span>
+            </div>
+        </div>
+    </footer>
     <script src="https://kit.fontawesome.com/a7577e03bc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
