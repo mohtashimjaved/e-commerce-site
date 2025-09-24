@@ -60,7 +60,7 @@ async function productApi() {
     const products = data.products
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
-        products_div.innerHTML += `<a class="product" href="">
+        products_div.innerHTML += `<a class="product animate-on-scroll is-visible" href="">
         <div class="product_inner" >
         <div class="product_image"><img src="${products[i].images[0]}"/></div>
         <div class="product_details">
