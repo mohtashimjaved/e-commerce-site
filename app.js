@@ -54,13 +54,13 @@ async function categoryApi() {
 
 categoryApi()
 async function productApi() {
-    const fetch_api = await fetch(`${api}/products?limit=40&skip=77`)
+    const fetch_api = await fetch(`${api}/products?limit=20&skip=77`)
     const data = await fetch_api.json()
     console.log(data);
     const products = data.products
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
-        products_div.innerHTML += `<a class="product animate-on-scroll is-visible" href="">
+        products_div.innerHTML += `<a class="product" href="">
         <div class="product_inner" >
         <div class="product_image"><img src="${products[i].images[0]}"/></div>
         <div class="product_details">
