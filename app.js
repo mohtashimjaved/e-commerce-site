@@ -6,7 +6,7 @@ async function categoryApi() {
     console.log(data);
     const category_div = document.getElementById("category_div")
     for (let i = 0; i < data.length; i++) {
-        category_div.innerHTML += `<a class="category" href="./category.html?name=${data[i].name}">${data[i].name}</a>`
+        category_div.innerHTML += `<a class="category" href="/category.html?name=${data[i].name}">${data[i].name}</a>`
 
     }
     let title;
