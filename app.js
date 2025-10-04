@@ -11,7 +11,7 @@ async function categoryApi() {
     }
     let title;
     const categoryProductsMain = document.querySelector(".categoryProductsMain")
-    if (window.location.pathname == "/category.html") {
+    if (window.location.pathname == "/category.html" || window.location.pathname == "/category" ) {
         const search_params = new URLSearchParams(window.location.search);
         for (const [key, value] of search_params.entries()) {
             if (key === "name") {
@@ -36,7 +36,7 @@ async function categoryApi() {
                 <div class="product_inner" >
                 <div class="product_image"><img src="${categoryproducts[i].images[0]}"/></div>
                 <div class="product_details">
-                <div class="product_price">$${categoryproducts[i].price}<i class="fa-solid   fa-cart-plus"></i></div>
+                <div class="product_price">$${categoryproducts[i].price}<i class="fa-solid fa-cart-plus"></i></div>
                 <div class="product_title">
                 ${categoryproducts[i].title}
                 </div>
@@ -76,7 +76,10 @@ async function productApi() {
 
     }
 }
-productApi()
+if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+    
+    productApi()
+}
 
 // mouse scroll
 const scrollableContainer = document.getElementById("category_div");
