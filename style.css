@@ -171,6 +171,7 @@ header{
 }
 
 .carousel-item img {
+    /* width: 100%; */
     height: 500px;
     object-fit: cover;
     filter: brightness(0.8);
@@ -367,7 +368,6 @@ article {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
-
 .product_rating {
     font-size: 14px; 
     color: #7a7b45;
@@ -375,6 +375,117 @@ article {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+
+.detailsMainDiv {
+    padding: 40px 20px;
+}
+.imagesAnddetailsdiv {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+.imagesDiv {
+    flex: 1;
+    max-width: 500px;
+}
+.detailsDiv {
+    flex: 1;
+}
+
+.title h1 {
+    font-size: 2.5em;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+.title h3 {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 20px;
+}
+.priceDiv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.rating {
+    background-color: #601675;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+.rating i {
+    margin-right: 5px;
+}
+.price h2 {
+    font-size: 40px;
+    color: #9a26ba;
+    display: flex;
+    align-items: center;
+}
+.price span h6 {
+    font-size: 12px;
+    background-color: #7a7b45;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.descriptionAndInfoDiv h4 {
+    font-weight: 600;
+    margin-top: 15px;
+    color: #9a26ba;
+}
+.info-section > div {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.info-section i {
+    color: #601675;
+    margin-right: 15px;
+    font-size: 1.1em;
+    width: 20px;
+}
+.info-section span {
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.addToCartBtn, .buyNowBtn {
+    padding: 12px 30px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 48%; /* Adjusting button width */
+}
+.addToCartBtn {
+    background-color: #601675;
+    color: white;
+    margin-right: 4%;
+}
+.buyNowBtn {
+    background-color: #7a7b45;
+    color: white;
+}
+.addToCartBtn:hover, .buyNowBtn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+.addToCartBtn i, .buyNowBtn i {
+    margin-right: 8px;
 }
 
 

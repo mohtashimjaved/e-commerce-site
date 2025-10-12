@@ -44,7 +44,7 @@ async function getCategoryList() {
     const apiFetch = await fetch(`${api}/products/categories`)
     const data = await apiFetch.json()
     const category_div = document.getElementById("category_div")
-    if (category_div) {  
+    if (category_div) {
         for (let i = 0; i < data.length; i++) {
             category_div.innerHTML += `<a class="category" href="/category.html?name=${data[i].name}">${data[i].name}</a>`
         }
@@ -53,24 +53,24 @@ async function getCategoryList() {
         let isDragging = false;
         let startX;
         let scrollLeft;
-        
+
         scrollableContainer.addEventListener('mousedown', (e) => {
             isDragging = true;
             startX = e.pageX - scrollableContainer.offsetLeft;
             scrollLeft = scrollableContainer.scrollLeft;
             scrollableContainer.style.cursor = 'grabbing';
         });
-        
+
         scrollableContainer.addEventListener('mouseleave', () => {
             isDragging = false;
             scrollableContainer.style.cursor = 'grab';
         });
-        
+
         scrollableContainer.addEventListener('mouseup', () => {
             isDragging = false;
             scrollableContainer.style.cursor = 'grab';
         });
-        
+
         scrollableContainer.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             e.preventDefault();
@@ -156,7 +156,88 @@ async function getDetailsOfProducts() {
             const productdetails = data.products
             const current_product = productdetails.find(product => product.title === title)
             console.log(current_product);
+            const images = current_product.images;
+            const Detailtitle = current_product.title;
+            const sku = current_product.sku;
+            const rating = current_product.rating;
+            const price = current_product.price;
+            const discPercent = current_product.discountPercentage;
+            const description = current_product.description;
+            const stock = current_product.stock;
+            const returnPolicy = current_product.returnPolicy;
+            const warranty = current_product.warrantyInformation;
+            const shipping = current_product.shippingInformation;
+            const detailsproductsDiv = document.getElementById("detailsProductsDiv");
+            detailsproductsDiv.innerHTML = `
+            <div class="imagesAnddetailsdiv">
+                    <div class="imagesDiv">
+                        <div id="carouselExampleIndicators" class="carousel slide  detailsCarousel"
+                            data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                            </div>
+                            <div class="carousel-inner">
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="detailsDiv">
+                        <div class="titleAndPriceDiv">
+                            <div class="title">
+                                <h1>${Detailtitle}</h1>
+                                <h3>${sku}</h3>
+                            </div>
+                            <div class="priceDiv">
+                                <div class="rating"><i class="fa-solid fa-star"></i> ${rating}</div>
+                                <div class="price">
+                                    <h2>$${price}<span><h6>${discPercent}% Off</h6></span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="descriptionAndInfoDiv">
+                            <div class="description"><h4>About this item:</h4> ${description}</div>
+                            <div class="info-section">
+                                <div class="stock"><i class="fa-solid fa-boxes-stacked"></i> In Stock: <span>${stock}</span></div>
+                                <div class="shipping"><i class="fa-solid fa-truck"></i> Shipping: <span>${shipping}</span></div>
+                                <div class="warranty"><i class="fa-solid fa-shield-halved"></i> Warranty: <span>${warranty}</span></div>
+                                <div class="policy"><i class="fa-solid fa-arrow-right-arrow-left"></i> Return Policy: <span>${returnPolicy}</span></div>
+                            </div>
+                            <button class="addToCartBtn"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
+                            <button class="buyNowBtn"><i class="fa-solid fa-bolt"></i> Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            `;
 
+            const carousel = document.querySelector(".carousel-indicators")
+            const carouselInner = document.querySelector(".carousel-inner")
+            let imageNumber = 0;
+            let slideNumber = 1;
+            images.map(i => {
+                carousel.innerHTML += `
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${imageNumber}"
+                aria-current="true" aria-label="Slide ${slideNumber} "></button>
+                `
+                carouselInner.innerHTML += `
+                <div class="carousel-item">
+                <img src="${images[imageNumber]}" class="d-block w-100 " alt="..."/>
+                </div>                               
+                `
+                // console.log(images);
+                carousel.firstElementChild.classList.add("active")
+                carouselInner.firstElementChild.classList.add("active")
+                
+                imageNumber++;
+                slideNumber++;
+                console.log(imageNumber, slideNumber);
+            })
         }
     }
 }
