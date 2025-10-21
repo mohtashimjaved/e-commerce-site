@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Dynamic Navbar - Sticky Footer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        
+        <div class="header-left">
+            <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+                <span class="menu-text">MENU</span>
+            </button>
+        </div>
+        <div class="header-center">
+            <a href="#" class="logo"><img src="./assets/logo.png" alt="" width="160px"></a>
+        </div>
+        <div class="header-right">
+            <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
+            <button class="icon-button" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+    </header>
+
+    <section id="search-bar-section" class="search-bar-section">
+        <div class="search-container">
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input">
+            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
+            <button id="close-search" class="close-search" aria-label="Close Search"><i class="fas fa-times"></i></button>
+        </div>
+    </section>
+
+    <nav id="off-canvas-menu" class="off-canvas main-nav">
+        <div class="menu-header">
+            <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div id="user-info-section" class="user-info-section">
+            <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <span id="user-name" class="user-name">Guest User</span>
+                <span id="user-email" class="user-email"></span>
+            </div>
+        </div>
+        
+        <ul class="main-menu-list">
+            <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i class="fas fa-user-cog"></i> My Profile</a></li>
+            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i class="fas fa-clipboard-list"></i> My Orders</a>
+            </li>
+            <hr>
+            <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
+            <!-- <li><a href="#collections"><i class="fas fa-box-open"></i> Collections</a></li> -->
+            <!-- <li><a href="#sale"><i class="fas fa-tag"></i> Sale</a></li> -->
+            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+
+            
+            </ul>
+
+        <div id="auth-footer" class="auth-footer">
+             <a id="login-link" href="#login" class="auth-footer-link login-link"><i class="fas fa-sign-in-alt"></i> Login / Sign Up</a>
+             <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+    </nav>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="navbar.js"></script>
+</body>
+</html>

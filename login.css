@@ -1,0 +1,282 @@
+/* --- 1. Global Reset and Base Styles --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Primary Colors */
+    --clr-dark-purple: #360841; /* Deep background color */
+    --clr-main-purple: #9a26ba; /* Main button/accent color */
+    --clr-light-purple: #854696; /* Lighter accents/text */
+    --clr-white: #FFFFFF;
+    --clr-gray-text: #666666;
+    --clr-light-bg: #F8F9FA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(45deg, #000000,  #2d1933);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- 2. Main Container (Split Layout) --- */
+.main_box {
+    display: flex;
+    max-width: 1100px; /* Standard desktop width */
+    width: 90%;
+    min-height: 650px; /* Ensures a good height */
+    background: var(--clr-white);
+    border-radius: 15px;
+    overflow: hidden; /* To contain the form_image and form */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 3. Left Panel (Image/Info Side) --- */
+.form_image {
+    flex: 1; /* Takes up one part of the space (e.g., 50%) */
+    /* background: var(--clr-main-purple); */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    filter: brightness(0.7) grayscale(0.2); 
+    justify-content: center;
+    /* opacity: 0.8;  */
+
+    transition: all 0.5s;
+}
+
+.form_image::after {
+    content: "DEALIO.";
+    width: 100%;
+    position: absolute;
+    left: 50px;
+    top: 60px;
+    color: #ddd;
+    font-size: 65px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+.form_image::before img{
+    width: 100%;
+}
+
+
+.form {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    background: var(--clr-white);
+}
+
+.form h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--clr-dark-purple);
+    margin-bottom: 5px;
+}
+
+.form p {
+    font-size: 0.9rem;
+    color: var(--clr-gray-text);
+    margin-bottom: 20px;
+}
+
+.register_link, .login_link {
+    color: var(--clr-main-purple);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.register_link:hover, .login_link:hover {
+    color: var(--clr-dark-purple);
+    text-decoration: underline;
+}
+.modify_text {
+    padding: 10px 15px;
+    margin-bottom: 20px !important; /* Override previous <p> margin */
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    visibility: hidden; /* Hide by default */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Style for error state (Red background) */
+.modify_text.error {
+    background-color: #fce4e4; /* Very light red background */
+    color: #e53935; /* Dark red text */
+    border: 1px solid #e57373; /* Red border */
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Keyframes for the shake animation */
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Class to apply the shake animation */
+.modify_text.shake {
+    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Optional: Style for a potential success state (Green background) */
+.modify_text.success {
+    background-color: #e8f5e9; /* Light green background */
+    color: #43a047; /* Dark green text */
+    border: 1px solid #a5d6a7; /* Green border */
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- 5. Input Fields and Boxes --- */
+.input_box {
+    position: relative;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_box label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--clr-dark-purple);
+    margin-bottom: 5px;
+}
+
+.input_box input {
+    width: 100%;
+    height: 50px;
+    padding: 10px 40px 10px 15px; /* Adjust padding for icon */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input_box input:focus {
+    border-color: var(--clr-main-purple);
+    box-shadow: 0 0 0 3px rgba(78, 49, 170, 0.2); /* Subtle glow effect */
+}
+
+/* Icon Styling (Font Awesome) */
+.input_box i {
+    position: absolute;
+    right: 15px;
+    /* Adjust based on whether it's an input or a generic input_box div */
+    top: 10px; /* Approximately center-aligned with the input field */
+    color: var(--clr-light-purple);
+    font-size: 1.5rem;
+}
+
+/* Remove label from register.html structure to align icon correctly */
+.input_box input + i {
+     top: 38px; /* Icon position when label is present */
+}
+
+/* --- 6. Button and Separator --- */
+.btn {
+    width: 100%;
+    height: 50px;
+    background: var(--clr-main-purple);
+    border: none;
+    border-radius: 8px;
+    color: var(--clr-white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: var(--clr-dark-purple);
+}
+
+.social_text {
+    text-align: center;
+    margin: 15px 0 15px 0 !important; /* Override p margin-bottom */
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--clr-gray-text);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+    width: 100%;
+    display: none; /* The image shows a text separator "Or login with" not a <hr> */
+}
+
+/* --- 7. Social Icons --- */
+.social_icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.social_icons .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50px;
+    border: 1px solid var(--clr-light-purple);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: var(--clr-main-purple);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social_icons .icons:hover {
+    background: var(--clr-light-purple);
+    color: var(--clr-white);
+}
+
+/* --- 8. Responsiveness (Mobile View) --- */
+@media (max-width: 900px) {
+    .main_box {
+        width: 95%;
+        min-height: auto;
+        flex-direction: column; /* Stack the image and form vertically */
+    }
+
+    .form_image {
+        display: none; /* Hide the image side on mobile for better usability */
+    }
+
+    .form {
+        flex: none;
+        padding: 40px 30px;
+    }
+}

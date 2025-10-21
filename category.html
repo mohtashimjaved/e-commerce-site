@@ -11,39 +11,70 @@
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 
 </head>
+
 <body>
-    <header class="">
-        <nav class="navbar navbar-expand-lg nav">
-            <div class="container-fluid _navbar">
-                <a class="navbar-brand logo"><img src="./assets/logo.png" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end menu_div" tabindex="-1" id="offcanvasNavbar"
-                    aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <div class="navbar-nav justify-content-end flex-grow-1 pe-3 menu">
-                            <a class="nav-link nav_items _active" aria-current="page" href="./index.html">Home</a>
-                            <a class="nav-link nav_items" href="">All Products</a>
-                            <a class="nav-link nav_items" href="#">Contact Us</a>
-                        </div>
-                    </div>
+    <header class="main-header">
+        <div class="header-left">
+            <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+                <span class="menu-text">MENU</span>
+            </button>
+        </div>
+        <div class="header-center">
+            <a href="#" class="logo"><img src="./assets/logo.png" alt="" width="160px"></a>
+        </div>
+        <div class="header-right">
+            <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
+            <button class="icon-button" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+    </header>
+        <!-- Search bar Section -->
+        <section id="search-bar-section" class="search-bar-section">
+            <div class="search-container">
+                <input type="text" placeholder="Search products, collections, and more..." class="search-input">
+                <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
+                <button id="close-search" class="close-search" aria-label="Close Search"><i class="fas fa-times"></i></button>
+            </div>
+        </section>
+        <!-- Off Canvas Menu -->
+        <nav id="off-canvas-menu" class="off-canvas main-nav">
+            <div class="menu-header">
+                <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="user-info-section" class="user-info-section">
+                <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
+                <div class="user-info">
+                    <div id="user-name" class="user-name">Guest User</div>
+                    <div id="user-email" class="user-email">Please log in or sign up.</div>
                 </div>
             </div>
+            <ul class="main-menu-list">
+                <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i
+                            class="fas fa-user-cog"></i> My Profile</a></li>
+                            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
+                            class="fas fa-clipboard-list"></i> My Orders</a>
+                </li>
+                <hr>
+                <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
+                <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+            </ul>
+            <div id="auth-footer" class="auth-footer">
+                <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i class="fas fa-sign-in-alt"></i>
+                    Login / Sign Up</a>
+                <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i
+                        class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </div>
         </nav>
+        <div id="overlay" class="overlay"></div>
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
             <ol class="breadcrumb _breadcrumb">
-                <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a></li>
-                <li class="breadcrumb-item breadcrumb_item"><a href="./category.html">Categories</a></li>
+                <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item breadcrumb_item">Details</li>
                 <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active"></li>
             </ol>
         </nav>
-    </header>
     <article>
         <div class="category_main">
             <div class="category_heading">All Categories</div>
@@ -112,6 +143,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="./app.js"></script>
 
 </body>

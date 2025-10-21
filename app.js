@@ -180,7 +180,7 @@ async function getDetailsOfProducts() {
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
-                            </button>
+                        </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
@@ -196,7 +196,7 @@ async function getDetailsOfProducts() {
                             <div class="priceDiv">
                                 <div class="rating"><i class="fa-solid fa-star"></i> ${rating}</div>
                                 <div class="price">
-                                    <h2>$${price}<span><h6>${discPercent}% Off</h6></span></h2>
+                                    <h2>$${price}<div><h6>${discPercent}% Off</h6></div></h2>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +210,6 @@ async function getDetailsOfProducts() {
                                 <div class="policy"><i class="fa-solid fa-arrow-right-arrow-left"></i> Return Policy: <span>${returnPolicy}</span></div>
                             </div>
                             <button class="addToCartBtn"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
-                            <button class="buyNowBtn"><i class="fa-solid fa-bolt"></i> Buy Now</button>
                         </div>
                     </div>
                 </div>
