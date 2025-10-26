@@ -9,43 +9,55 @@
         integrity="sha512-Z/kgzn+a9dcIyghL2vPc2bXabGwnlPuUCOYujKnw8/LN3h0RY/22I7FSGCw11AeUtiJx6XEFH0dJv/9E7Z0lIA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="login.css">
-    <link rel="shortcut icon" href="./assets/favicon.ico
-    " type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
+    <!-- Floating background elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
     <div class="main_box signup">
         <div class="form_image">
-            <img src="./assets/login_page.png" alt="">
+            <a href="./index.html">
+            <img src="./assets/logo.png" alt="Dealio Logo" class="image2">
+            </a>
+            <div class="image-overlay">
+                <h2>Join Dealio!</h2>
+                <p>Create an account to unlock amazing deals and personalized shopping recommendations</p>
+            </div>
         </div>
         <div class="form">
             <h1>Registration</h1>
-            <p class="modify_text animate__animated" id="modify_text"></p>
             <p>Already have an account?
                 <a class="login_link" href="./login.html">Login</a>
             </p>
+            <p class="modify_text animate__animated" id="modify_text"></p>
             <div class="input_box">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username"><i class="fa-solid fa-user"></i>
+                <input type="text" id="username" placeholder="Choose a username">
+                <i class="fa-solid fa-user"></i>
             </div>
             <div class="input_box">
                 <label for="email">Email</label>
-                <input type="text" id="email_r" placeholder="Email"><i class="fa-solid fa-envelope"></i>
+                <input type="text" id="email_r" placeholder="Enter your email">
+                <i class="fa-solid fa-envelope"></i>
             </div>
             <div class="input_box">
                 <label for="password">Password</label>
-                <input type="password" id="password_r" placeholder="Password"><i class="fa-solid fa-lock"></i>
+                <input type="password" id="password_r" placeholder="Create a strong password">
+                <i class="fa-solid fa-lock"></i>
+                <div class="password-strength"></div>
             </div>
             <div class="input_box">
                 <button type="submit" id="register_btn" class="btn" onclick="register()">Register</button>
-                <hr>
-                <p class="social_text">Or register with
-                </p>
+                <p class="social_text">Or register with</p>
             </div>
             <div class="social_icons">
                 <a class="icons"><i class="fa-brands fa-facebook-f"></i></a>
                 <a class="icons"><i class="fa-brands fa-google"></i></a>
-            </div>
             </div>
         </div>
     </div>

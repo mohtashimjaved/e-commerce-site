@@ -7,6 +7,7 @@
     <title>Home | Dealio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 
@@ -30,7 +31,7 @@
         </div>
     </header>
 
-    <section id="search-bar-section" class="search-bar-section">
+    <section id="search-bar-section" class="search-bar-section animate__animated">
         <div class="search-container">
             <input type="text" placeholder="Search products, collections, and more..." class="search-input">
             <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
@@ -62,8 +63,10 @@
             <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
         </ul>
         <div id="auth-footer" class="auth-footer">
-            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
-            <a id="signout-link" href="" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
+                    class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
+            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i
+                    class="fas fa-sign-out-alt"></i> Sign Out</a>
         </div>
     </nav>
     <div id="overlay" class="overlay"></div>
@@ -159,7 +162,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="app.js"></script>
-    <script src="./navbar.js"></script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>

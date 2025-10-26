@@ -31,8 +31,20 @@ const supabaseclient = supabase.createClient('https://whmlfysqskwnizilqjbr.supab
         document.body.style.overflow = '';
     }
 
-    function toggleSearch() {
-        searchBarSection.classList.toggle('active');
+    function openSearch() {
+        searchBarSection.classList.add('active');
+        searchBarSection.classList.add('animate__flipInX');
+        searchBarSection.classList.remove('animate__flipOutX');
+    }
+    
+    function closeSearch () {
+        searchBarSection.classList.remove('animate__flipInX');
+        searchBarSection.classList.add('animate__flipOutX');
+        setTimeout(() =>
+            searchBarSection.classList.remove('active'),
+        500
+        )
+
     }
 
     menuToggle.addEventListener('click', toggleNav);
@@ -41,8 +53,8 @@ const supabaseclient = supabase.createClient('https://whmlfysqskwnizilqjbr.supab
 
     offCanvasMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
 
-    searchToggle.addEventListener('click', toggleSearch);
-    document.getElementById('close-search').addEventListener('click', toggleSearch);
+    searchToggle.addEventListener('click', openSearch);
+    document.getElementById('close-search').addEventListener('click', closeSearch);
 
     async function session() {
         const { data, error } = await supabaseclient.auth.getSession()
@@ -72,12 +84,14 @@ const supabaseclient = supabase.createClient('https://whmlfysqskwnizilqjbr.supab
         return data;
     }
     session()
-    async function signoutfunc() {
-        const { error } = await supabaseclient.auth.signOut()
-        if (error) {
-            console.log(error);
-        }
-        window.location.reload();
-    }
+    // async function signoutfunc() {
+    //     const { error } = await supabaseclient.auth.signOut()
+    //     console.log(event.target);
+    //     if (error) {
+    //         console.log(error);
+    //     }
+        
+    //     // window.location.reload();
+    // }
     // signoutLink.addEventListener("click", signoutfunc)
 // });

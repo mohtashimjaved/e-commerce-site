@@ -10,33 +10,45 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="login.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-
 </head>
 
 <body>
+    <!-- Floating background elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
     <div class="main_box login">
         <div class="form_image">
-            <img src="./assets/login_page.png" alt="">
+            <a href="./index.html">
+                <img src="./assets/logo.png" alt="Dealio Logo" class="image2">
+            </a>
+            <div class="image-overlay">
+                <h2>Welcome Back!</h2>
+                <p>Sign in to access exclusive deals and personalized shopping experience</p>
+            </div>
         </div>
         <div class="form">
             <h1>Login</h1>
-            <p class="modify_text animate__animated" id="modify_text"></p>
             <p>Don't have an account?
                 <a class="register_link" href="./register.html">Register</a>
             </p>
+            <p class="modify_text animate__animated" id="modify_text"></p>
             <div class="input_box">
                 <label for="email">Email</label>
-                <input type="text" id="email" placeholder="Email"><i class="fa-solid fa-envelope"></i>
+                <input type="text" id="email" placeholder="Enter your email">
+                <i class="fa-solid fa-envelope"></i>
             </div>
             <div class="input_box">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password"><i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Enter your password">
+                <i class="fa-solid fa-lock"></i>
+                <div class="password-strength"></div>
             </div>
             <div class="input_box">
                 <button type="submit" id="login_btn" class="btn" onclick="login()">Login</button>
-                <hr>
-                <p class="social_text">Or login with
-                </p>
+                <p class="social_text">Or login with</p>
             </div>
             <div class="social_icons">
                 <a class="icons"><i class="fa-brands fa-facebook-f"></i></a>
