@@ -27,8 +27,10 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <button class="icon-button" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></button>
-        </div>
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            </a>
+            </div>
     </header>
 
     <section id="search-bar-section" class="search-bar-section animate__animated">
@@ -65,7 +67,7 @@
         <div id="auth-footer" class="auth-footer">
             <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
                     class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
-            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i
+            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;"><i
                     class="fas fa-sign-out-alt"></i> Sign Out</a>
         </div>
     </nav>
@@ -127,9 +129,8 @@
                 <div class="link-group">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="./about.html">About Us</a></li>
                         <li><a href="#">Contact US</a></li>
-                        <li><a href="#">About Developer</a></li>
 
                     </ul>
                 </div>
@@ -138,7 +139,7 @@
                 <div class="social-media">
                     <h4>Follow Us</h4>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
@@ -161,8 +162,9 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="app.js"></script>
-    <script src="navbar.js"></script>
+    <script src="app.js" type="module"></script>
+    <script src="navbar.js" type="module"></script>
+    <script type="module" src="./database.js"></script>
 </body>
 
 </html>

@@ -7,6 +7,7 @@
     <title>Home | Dealio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 
@@ -14,7 +15,6 @@
 
 <body>
     <header class="main-header">
-
         <div class="header-left">
             <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
@@ -26,10 +26,12 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <button class="icon-button" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i></button>
-        </div>
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            </a>
+            </div>
     </header>
-        <section id="search-bar-section" class="search-bar-section">
+        <section id="search-bar-section" class="search-bar-section animate__animated ">
             <div class="search-container">
                 <input type="text" placeholder="Search products, collections, and more..." class="search-input">
                 <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
@@ -148,8 +150,9 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="./navbar.js"></script>
-    <script src="./app.js"></script>
+    <script src="./navbar.js" type="module"></script>
+    <script src="./app.js" type="module" ></script>
+    <script type="module" src="./database.js"></script>
 
 </body>
 

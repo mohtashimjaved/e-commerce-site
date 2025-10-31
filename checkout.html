@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Dealio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-left">
+        </div>
+        <div class="header-center">
+            <a href="./index.html" class="logo"><img src="./assets/logo.png" alt="" width="160px"></a>
+        </div>
+        <div class="header-right">
+        </div>
+    </header>
+
+    <div id="overlay" class="overlay"></div>
+
+    <article>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
+            <ol class="breadcrumb _breadcrumb">
+                <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item breadcrumb_item"><a href="./cart.html">Cart</a>
+            </li>
+                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active">Checkout</li>
+            </ol>
+        </nav>
+
+        <div class="checkout-container">
+            <form id="buyerInfoForm" class="checkout-form">
+                <h2>Shipping & Billing Information</h2>
+
+                <div class="name-fields">
+                    <div class="form-group">
+                        <label for="firstName">First Name<span class="required-star">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name<span class="required-star">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address<span class="required-star">*</span></label>
+                    <input type="email" id="email" name="email" required style="text-transform: lowercase;">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number<span class="required-star">*</span></label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}"
+                        title="Phone number must be between 10 and 15 digits.">
+                </div>
+
+                <div class="form-group">
+                    <label for="address1">Street Address<span class="required-star">*</span></label>
+                    <input type="text" id="address1" name="address1" required
+                        placeholder="House number and street name">
+                </div>
+                <div class="form-group">
+                    <label for="address2">Apartment, suite, unit (optional)</label>
+                    <input type="text" id="address2" name="address2">
+                </div>
+
+                <div class="address-fields">
+                    <div class="form-group">
+                        <label for="city">City<span class="required-star">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State / Province<span class="required-star">*</span></label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                </div>
+
+                <div class="address-fields">
+                    <div class="form-group">
+                        <label for="zipCode">ZIP / Postal Code<span class="required-star">*</span></label>
+                        <input type="text" id="zipCode" name="zipCode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country<span class="required-star">*</span></label>
+                        <select id="country" name="country" required>
+                            <option value="">Select a country...</option>
+                            <option value="PAK">Pakistan</option>
+                            <option value="KSA">Saudia Arabia</option>
+                            <option value="UAE">United Arab</option>
+                            <option value="USA">United States</option>
+                            <option value="CAN">Canada</option>
+                            <option value="GBR">United Kingdom</option>
+                            <option value="AUS">Australia</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="confirm-order-btn">Confirm Order</button>
+            </form>
+        </div>
+    </article>
+
+    <div class="modal-overlay" id="successModalOverlay">
+        <div class="success-modal">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>Order Confirmed!</h3>
+            <p>Your order has been successfully placed. A confirmation email will be sent shortly.</p>
+            <button class="confirm-order-btn" onclick="window.location.href='/index.html'">Continue Shopping</button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-section links-section">
+                <div class="link-group">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/category.html?name=Laptops">Laptops</a></li>
+                        <li><a href="/category.html?name=Motorcycle">Motorcycle</a></li>
+                        <li><a href="/category.html?name=Fragrances">Fragrances</a></li>
+                        <li><a href="/category.html?name=Mens%20Watches">Watches</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Trending Searches</h4>
+                    <ul>
+                        <li><a href="/category.html?name=Smartphones">Smartphones</a></li>
+                        <li><a href="/category.html?name=Tablets">Tablets</a></li>
+                        <li><a href="/category.html?name=Vehicle">Vehicle</a></li>
+                        <li><a href="/category.html?name=Beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="#">Contact US</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-section social-newsletter-section">
+                <div class="social-media">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="copyright-legal">
+                        <span>&copy; 2025 Dealio. All rights reserved.</span>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="design-credit">
+                        <span>Design by Mohtashim Javed</span>
+                    </div>
+                </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="./app.js"></script>
+    <script type="module" src="./navbar.js"></script>
+    <script type="module" src="./checkout.js"></script>
+    <!-- <script type="module" src="./cart.js"></script> -->
+</body>
+
+</html>

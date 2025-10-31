@@ -1,4 +1,13 @@
-const supabaseclient = supabase.createClient('https://whmlfysqskwnizilqjbr.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndobWxmeXNxc2t3bml6aWxxamJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MTcyNjcsImV4cCI6MjA3NjE5MzI2N30.AF3Rk8iIBEjaa8Ci4XXZyLHM8_nS_NdXQ5iiOA0KYZ4')
+import {supabaseclient, session} from "./database.js";
+
+// Initialize session check
+const checkSession = async () => {
+    const getSession = await session();
+    if (getSession.session) {
+        window.location.href = "/"
+    }
+}
+checkSession();
 
 const username_r = document.getElementById("username");
 const email_r = document.getElementById("email_r");
@@ -80,6 +89,7 @@ async function register() {
     registerBtn.classList.remove('loading');
     registerBtn.disabled = false;
 }
+registerBtn.addEventListener('click', register)
 
 function emptyInputValues(name, email, password) {
     for (let i = 0; i < arguments.length; i++) {
@@ -118,18 +128,3 @@ async function signup(username, email, password) {
     
     return data;
 }
-
-async function session() {
-    const { data, error } = await supabaseclient.auth.getSession();
-    if (error) {
-        console.log(error);
-    }
-    console.log(data);
-    if (data.session) {
-        window.location.href = "/";
-    }
-    return data;
-}
-
-// Initialize session check
-session();

@@ -843,9 +843,10 @@ body::before {
 .btn.loading {
     pointer-events: none;
     opacity: 0.7;
+
 }
 
-.btn.loading::after {
+.btn.loading::before {
     content: '';
     position: absolute;
     width: 20px;

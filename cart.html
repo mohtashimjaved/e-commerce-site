@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Dealio</title>
+    <title>Your Cart | Dealio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-
 </head>
 
 <body>
@@ -26,69 +25,87 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i
+                    class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
-            </div>
+        </div>
     </header>
-        <!-- Search bar Section -->
-        <section id="search-bar-section" class="search-bar-section animate__animated">
-            <div class="search-container">
-                <input type="text" placeholder="Search products, collections, and more..." class="search-input">
-                <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
-                <button id="close-search" class="close-search" aria-label="Close Search"><i class="fas fa-times"></i></button>
+    <!-- Search bar Section -->
+    <section id="search-bar-section" class="search-bar-section animate__animated">
+        <div class="search-container">
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input">
+            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
+            <button id="close-search" class="close-search" aria-label="Close Search"><i
+                    class="fas fa-times"></i></button>
+        </div>
+    </section>
+    <!-- Off Canvas Menu -->
+    <nav id="off-canvas-menu" class="off-canvas main-nav">
+        <div class="menu-header">
+            <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <div id="user-info-section" class="user-info-section">
+            <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div id="user-name" class="user-name">Guest User</div>
+                <div id="user-email" class="user-email">Please log in or sign up.</div>
             </div>
-        </section>
-        <!-- Off Canvas Menu -->
-        <nav id="off-canvas-menu" class="off-canvas main-nav">
-            <div class="menu-header">
-                <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="user-info-section" class="user-info-section">
-                <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                    <div id="user-name" class="user-name">Guest User</div>
-                    <div id="user-email" class="user-email">Please log in or sign up.</div>
+        </div>
+        <ul class="main-menu-list">
+            <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i
+                        class="fas fa-user-cog"></i> My Profile</a></li>
+            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
+                        class="fas fa-clipboard-list"></i> My Orders</a>
+            </li>
+            <hr>
+            <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+        </ul>
+        <div id="auth-footer" class="auth-footer">
+            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
+                    class="fas fa-sign-in-alt"></i>
+                Login / Sign Up</a>
+            <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;"
+                onclick="signoutfunc()"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+    </nav>
+    <div id="overlay" class="overlay"></div>
+    </div>
+    </header>
+
+    <main class="container my-5">
+        <h1 class="text-center mb-4">Shopping Cart</h1>
+
+        <div class="cart-layout">
+            <section class="cart-items-container">
+                <ul id="cart-list" class="list-group">
+                    <p id="empty-cart-message" class="text-center text-muted mt-5">Your cart is empty.</p>
+                </ul>
+            </section>
+
+            <aside class="cart-summary-box">
+                <h4>Order Summary</h4>
+                <div class="summary-line">
+                    <span>Subtotal (<span id="summary-item-count">0</span> items)</span>
+                    <span id="summary-subtotal">$0.00</span>
                 </div>
-            </div>
-            <ul class="main-menu-list">
-                <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i
-                            class="fas fa-user-cog"></i> My Profile</a></li>
-                            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
-                            class="fas fa-clipboard-list"></i> My Orders</a>
-                </li>
-                <hr>
-                <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
-                <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
-                <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
-            </ul>
-            <div id="auth-footer" class="auth-footer">
-                <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i class="fas fa-sign-in-alt"></i>
-                    Login / Sign Up</a>
-                <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i
-                        class="fas fa-sign-out-alt"></i> Sign Out</a>
-            </div>
-        </nav>
-        <div id="overlay" class="overlay"></div>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
-            <ol class="breadcrumb _breadcrumb">
-                <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item breadcrumb_item">Category</li>
-                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active"></li>
-            </ol>
-        </nav>
-    <article>
-        <div class="category_main">
-            <div class="category_heading">All Categories</div>
-            <div id="category_div">
-            </div>
+                <div class="summary-line">
+                    <span>Shipping Estimate</span>
+                    <span>$0.00 (Free)</span>
+                </div>
+                <div class="summary-line total-line">
+                    <strong>Estimated Total</strong>
+                    <strong id="summary-total">$0.00</strong>
+                </div>
+                <a href="./checkout.html" class="btn checkout-btn w-100 mt-3">Proceed to Checkout</a>
+            </aside>
         </div>
-        <div class="categoryProductsMain">
-            <div id="category_products_heading"></div>
-            <div id="categoryProductsDiv"></div>
-        </div>
-    </article>
+    </main>
+
+
     <footer class="site-footer">
         <div class="footer-container">
 
@@ -142,15 +159,17 @@
                     </div>
                 </div>
     </footer>
+
+
     <script src="https://kit.fontawesome.com/a7577e03bc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="./navbar.js" type="module"></script>
-    <script src="./app.js" type="module"></script>
     <script src="./database.js" type="module"></script>
+    <script src="./navbar.js" type="module"></script>
+    <script src="./cart.js" type="module"></script>
 
 </body>
 
