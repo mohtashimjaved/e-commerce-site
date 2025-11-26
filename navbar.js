@@ -60,7 +60,7 @@ searchToggle?.addEventListener('click', openSearch);
 document.getElementById('close-search')?.addEventListener('click', closeSearch);
 
 function initSearch() {
-    const searchInput = document.getElementById("search-input");
+    const searchInput = document.querySelector(".search-input");
     const searchButton = document.getElementById("search-button"); // Ensure you have a button or icon with this ID inside your search bar
 
     if (searchInput) {
