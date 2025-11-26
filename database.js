@@ -24,4 +24,12 @@ export async function signInWithGoogle() {
         console.log('Signed in with Google:', data);
     }
 }
+export async function signoutfunc() {
+  const { error } = await supabaseclient.auth.signOut()
+  // console.log(event.target);
+  if (error) {
+    console.log(error);
+  }
 
+  window.location.reload();
+}

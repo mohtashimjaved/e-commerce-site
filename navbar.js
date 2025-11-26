@@ -1,4 +1,4 @@
-import { session } from "./database.js";
+import { signoutfunc, session } from "./database.js";
 // document.addEventListener('DOMContentLoaded', () => {
 
 const menuToggle = document?.getElementById('menu-toggle');
@@ -98,4 +98,4 @@ const checkSession = async () => {
     updateCartCount()
 }
 checkSession()
-// })
+document.getElementById("signout-link")?.addEventListener('click', signoutfunc)

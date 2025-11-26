@@ -1,7 +1,6 @@
 import { updateCartCount } from './navbar.js' // Assuming navbar.js is accessible
 import { supabaseclient, session } from './database.js' // Assuming navbar.js is accessible
 
-if
 const form = document.getElementById('buyerInfoForm');
 const modalOverlay = document.getElementById('successModalOverlay');
 

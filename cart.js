@@ -1,8 +1,9 @@
 // cart.js
 
-import { session } from "./database.js";
+import { signoutfunc, session } from "./database.js";
 import { updateCartCount } from "./navbar.js"; // Import the function to update the navbar badge
 
+const isCartPage = document.getElementById("cartPage")
 const cartList = document.getElementById('cart-list');
 const emptyCartMessage = document.getElementById('empty-cart-message');
 const summaryItemCount = document.getElementById('summary-item-count');
@@ -145,8 +146,7 @@ function renderCart() {
 async function checkLoginAndLoadCart() {
     const { session: userSession } = await session();
     
-    if (!userSession) {
-        // If not logged in, redirect to login page (fulfills requirement)
+    if (!userSession && isCartPage) {
         window.location.href = loginRedirectUrl;
         return;
     }
@@ -156,4 +156,6 @@ async function checkLoginAndLoadCart() {
 }
 
 // Run on page load
-document.addEventListener('DOMContentLoaded', checkLoginAndLoadCart);
+checkLoginAndLoadCart ();
+
+document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
