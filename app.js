@@ -219,6 +219,7 @@ async function handleAddToCart(event) {
     window.location.href = loginRedirectUrl;
     return;
   }
+  const cartUserEmail = userSession.user.email;
 
   // Logged in: Add item to local storage
   const price = parseFloat(priceAttr);
@@ -230,7 +231,7 @@ async function handleAddToCart(event) {
     return;
   }
 
-  const newItem = { id, title, price, image, quantity: 1 };
+  const newItem = { id, title, price, image, quantity: 1, email: cartUserEmail };
 
   let cart = JSON.parse(localStorage.getItem('cartItems')) || [];
 

@@ -11,13 +11,19 @@ const summarySubtotal = document.getElementById('summary-subtotal');
 const summaryTotal = document.getElementById('summary-total');
 
 // Assuming your login page is named 'login.html'
-const loginRedirectUrl = './login.html'; 
+const loginRedirectUrl = './login.html';
 
 // --- Core Cart Logic ---
 
-function getCart() {
+async function getCart() {
     // Retrieve cart items from local storage
-    return JSON.parse(localStorage.getItem('cartItems')) || [];
+    const { session: userSession } = await session();
+    if (!userSession) {
+        window.location.href = loginRedirectUrl;
+    }
+    const cartUserEmail = userSession.user.email;
+    const cartArr = JSON.parse(localStorage.getItem('cartItems')) || [];
+    return userWiseCart = cartArr.filter(item => item.email == cartUserEmail)
 }
 
 function saveCart(cart) {
@@ -32,19 +38,19 @@ function calculateTotals(cart) {
 
     cart.forEach(item => {
         // Ensure price is a number before calculation
-        subtotal += parseFloat(item.price) * item.quantity; 
+        subtotal += parseFloat(item.price) * item.quantity;
         totalItems += item.quantity;
     });
 
     // Simple total calculation for this example
-    const total = subtotal; 
+    const total = subtotal;
 
     return { subtotal, total, totalItems };
 }
 
 function updateSummary(cart) {
     const { subtotal, total, totalItems } = calculateTotals(cart);
-    
+
     summaryItemCount.textContent = totalItems;
     summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
     summaryTotal.textContent = `$${total.toFixed(2)}`;
@@ -62,20 +68,20 @@ function handleQuantityChange(id, change) {
         if (cart[itemIndex].quantity <= 0) {
             // Automatically delete if quantity drops to 0 or less
             handleDeleteItem(id);
-            return; 
+            return;
         }
 
         saveCart(cart);
-        renderCart(); 
+        renderCart();
     }
 }
 
 function handleDeleteItem(id) {
     let cart = getCart();
     // Filter out the item to be deleted
-    cart = cart.filter(item => item.id !== id); 
+    cart = cart.filter(item => item.id !== id);
     saveCart(cart);
-    renderCart(); 
+    renderCart();
 }
 
 function handleCartAction(event) {
@@ -90,9 +96,9 @@ function handleCartAction(event) {
     } else if (target.classList.contains('minus-btn')) {
         handleQuantityChange(id, -1);
     } else if (target.classList.contains('item-delete-btn')) {
-    
-            handleDeleteItem(id);
-        
+
+        handleDeleteItem(id);
+
     }
 }
 
@@ -100,11 +106,11 @@ function handleCartAction(event) {
 
 function renderCart() {
     const cart = getCart();
-    
+
     // Remove existing event listener before clearing and re-rendering
     cartList.removeEventListener('click', handleCartAction);
-    cartList.innerHTML = ''; 
-    
+    cartList.innerHTML = '';
+
     if (cart.length === 0) {
         // Show empty cart message
         emptyCartMessage.style.display = 'block';
@@ -114,7 +120,7 @@ function renderCart() {
         cart.forEach(item => {
             const listItem = document.createElement('li');
             listItem.className = 'list-group-item cart-item';
-            
+
             const itemTotal = (item.price * item.quantity).toFixed(2);
 
             listItem.innerHTML = `
@@ -130,14 +136,14 @@ function renderCart() {
                 </div>
                 <button class="item-delete-btn" data-id="${item.id}" aria-label="Remove item"><i class="fas fa-trash-alt"></i></button>
             `;
-            
+
             cartList.appendChild(listItem);
         });
-        
+
         // Re-add event listener after rendering
         cartList.addEventListener('click', handleCartAction);
     }
-    
+
     updateSummary(cart);
 }
 
@@ -145,7 +151,7 @@ function renderCart() {
 
 async function checkLoginAndLoadCart() {
     const { session: userSession } = await session();
-    
+
     if (!userSession && isCartPage) {
         window.location.href = loginRedirectUrl;
         return;
@@ -156,6 +162,6 @@ async function checkLoginAndLoadCart() {
 }
 
 // Run on page load
-checkLoginAndLoadCart ();
+checkLoginAndLoadCart();
 
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)

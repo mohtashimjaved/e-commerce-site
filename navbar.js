@@ -59,17 +59,6 @@ offCanvasMenu?.querySelectorAll('a').forEach(link => link.addEventListener('clic
 searchToggle?.addEventListener('click', openSearch);
 document.getElementById('close-search')?.addEventListener('click', closeSearch);
 
-export function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    // Sum the quantity of all items
-    const totalItems = cart.length;
-    
-    if (cartCountElement) {
-        cartCountElement.textContent = totalItems;
-        // Show the badge only if there are items in the cart
-        cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
-    }
-}
 
 const checkSession = async () => {
     const getSession = await session();
@@ -91,7 +80,7 @@ const checkSession = async () => {
     else {
         profileLi.style.display = 'none';
         ordersLi.style.display = 'none';
-
+        
         signoutLink.style.display = 'none';
         loginLink.style.display = 'flex';
     }
@@ -99,3 +88,15 @@ const checkSession = async () => {
 }
 checkSession()
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
+
+export function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // Sum the quantity of all items
+    const totalItems = cart.length;
+    
+    if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+        // Show the badge only if there are items in the cart
+        cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
+    }
+}
