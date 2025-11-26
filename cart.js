@@ -23,7 +23,7 @@ async function getCart() {
     }
     const cartUserEmail = userSession.user.email;
     const cartArr = JSON.parse(localStorage.getItem('cartItems')) || [];
-    return userWiseCart = cartArr.filter(item => item.email == cartUserEmail)
+    return cartArr.filter(item => item.email == cartUserEmail);
 }
 
 function saveCart(cart) {
@@ -104,8 +104,8 @@ function handleCartAction(event) {
 
 // --- Rendering ---
 
-function renderCart() {
-    const cart = getCart();
+async function renderCart() {
+    const cart = await getCart();
 
     // Remove existing event listener before clearing and re-rendering
     cartList.removeEventListener('click', handleCartAction);
