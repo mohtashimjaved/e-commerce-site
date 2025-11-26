@@ -84,7 +84,6 @@ const checkSession = async () => {
         signoutLink.style.display = 'none';
         loginLink.style.display = 'flex';
     }
-    updateCartCount()
 }
 checkSession()
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
@@ -100,3 +99,4 @@ export function updateCartCount() {
         cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
     }
 }
+updateCartCount()
