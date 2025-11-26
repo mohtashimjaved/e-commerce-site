@@ -1406,3 +1406,19 @@ select {
     background-color: #f9f9f9;
     border-radius: 8px;
 }
+#search_heading {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    font-family: sans-serif; /* Replace with your site's font */
+    font-size: 2rem;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.breadcrumb {
+    padding: 15px 5%;
+    background-color: #f8f9fa; /* Light grey background for breadcrumb strip */
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
