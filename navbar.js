@@ -90,15 +90,18 @@ document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
 
 export async function updateCartCount() {
     const {session: getSession} = await session();
-    const cartUserEmail = getSession.user.email;
-    const allCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const cart = allCart.filter(item => item.email == cartUserEmail);
-    const totalItems = cart.length;
-    
-    if (cartCountElement) {
-        cartCountElement.textContent = totalItems;
-        // Show the badge only if there are items in the cart
-        cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
+    if (getSession) {
+        
+        const cartUserEmail = getSession.user.email;
+        const allCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cart = allCart.filter(item => item.email == cartUserEmail);
+        const totalItems = cart.length;
+        
+        if (cartCountElement) {
+            cartCountElement.textContent = totalItems;
+            // Show the badge only if there are items in the cart
+            cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
+        }
     }
 }
 updateCartCount()
