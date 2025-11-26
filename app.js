@@ -28,8 +28,8 @@ async function getFeaturedProducts() {
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
       products_div.innerHTML += `
-      <a class="product" href="/details.html?id=${products[i].id}">
-            <div class="product_inner">
+      <div class="product">
+      <a class="product_inner" href="/details.html?id=${products[i].id}">
             <div class="product_image"><img src="${products[i].thumbnail}"/></div>
             <div class="product_details">
             <div class="product_title">
@@ -38,7 +38,7 @@ async function getFeaturedProducts() {
             <div class="product_descp">${products[i].description}</div>
             <div class="product_price">$${products[i].price}</div>
             </div>
-            </div>
+            </a>
             <button class="addToCartBtn"
             data-id="${products[i].id}"
             data-title="${products[i].title}"
@@ -49,7 +49,7 @@ async function getFeaturedProducts() {
             </span>
             <p class="text">Add To Cart</p>
             </button>
-            </a>
+            </div>
             `
       document.querySelectorAll('.addToCartBtn').forEach(button => {
         button.addEventListener('click', handleAddToCart);
@@ -169,8 +169,8 @@ async function getProductsbyCategory() {
       breadcrumb_item_active.innerText = name
       for (let i = 0; i < data.length; i++) {
         categoryProductsDiv.innerHTML += `
-            <a class="CategoryProducts" href="/details.html?id=${data[i].id}">
-            <div class="product_inner">
+        <div class="CategoryProducts">
+        <a class="products_inner" href="/details.html?id=${data[i].id}">
             <div class="product_image"><img src="${data[i].thumbnail}"/></div>
             <div class="product_details">
             <div class="product_title">
@@ -179,7 +179,7 @@ async function getProductsbyCategory() {
             <div class="product_descp">${data[i].description}</div>
             <div class="product_price">$${data[i].price}</div>
             </div>
-            </div>
+            </a>
             <button class="addToCartBtn"
             data-id="${data[i].id}"
             data-title="${data[i].title}"
@@ -190,7 +190,7 @@ async function getProductsbyCategory() {
             </span>
             <p class="text">Add To Cart</p>
             </button>
-            </a>`
+            </div>`
       }
       document.querySelectorAll('.addToCartBtn').forEach(button => {
         button.addEventListener('click', handleAddToCart);
