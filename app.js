@@ -27,8 +27,8 @@ async function getFeaturedProducts() {
 
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
-      products_div.innerHTML += `<div class="product" href="/details.html?id=${products[i].id}">
-            <a class="product_inner">
+      products_div.innerHTML += `<a class="product" href="/details.html?id=${products[i].id}">
+            <div class="product_inner">
             <div class="product_image"><img src="${products[i].thumbnail}"/></div>
             <div class="product_details">
             <div class="product_title">
