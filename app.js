@@ -170,7 +170,7 @@ async function getProductsbyCategory() {
       for (let i = 0; i < data.length; i++) {
         categoryProductsDiv.innerHTML += `
         <div class="CategoryProducts">
-        <a class="products_inner" href="/details.html?id=${data[i].id}">
+        <a class="product_inner" href="/details.html?id=${data[i].id}">
             <div class="product_image"><img src="${data[i].thumbnail}"/></div>
             <div class="product_details">
             <div class="product_title">
