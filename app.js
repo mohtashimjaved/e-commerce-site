@@ -27,7 +27,8 @@ async function getFeaturedProducts() {
 
     const products_div = document.getElementById("products_div")
     for (let i = 0; i < products.length; i++) {
-      products_div.innerHTML += `<a class="product" href="/details.html?id=${products[i].id}">
+      products_div.innerHTML += `
+      <a class="product" href="/details.html?id=${products[i].id}">
             <div class="product_inner">
             <div class="product_image"><img src="${products[i].thumbnail}"/></div>
             <div class="product_details">
@@ -37,7 +38,7 @@ async function getFeaturedProducts() {
             <div class="product_descp">${products[i].description}</div>
             <div class="product_price">$${products[i].price}</div>
             </div>
-            </a>
+            </div>
             <button class="addToCartBtn"
             data-id="${products[i].id}"
             data-title="${products[i].title}"
@@ -48,7 +49,7 @@ async function getFeaturedProducts() {
             </span>
             <p class="text">Add To Cart</p>
             </button>
-            </div>
+            </a>
             `
       document.querySelectorAll('.addToCartBtn').forEach(button => {
         button.addEventListener('click', handleAddToCart);
