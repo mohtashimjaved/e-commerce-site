@@ -14,7 +14,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <header class="main-header">
         <div class="header-left">
             <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
@@ -27,20 +26,22 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i
+                    class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
-            </div>
+        </div>
     </header>
-
+    <!-- Search bar Section -->
     <section id="search-bar-section" class="search-bar-section animate__animated">
         <div class="search-container">
-            <input type="text" placeholder="Search products, collections, and more..." class="search-input" id="search-input">
-            <!-- <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button> -->
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input">
+            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
             <button id="close-search" class="close-search" aria-label="Close Search"><i
                     class="fas fa-times"></i></button>
         </div>
     </section>
+    <!-- Off Canvas Menu -->
     <nav id="off-canvas-menu" class="off-canvas main-nav">
         <div class="menu-header">
             <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i
@@ -60,50 +61,33 @@
                         class="fas fa-clipboard-list"></i> My Orders</a>
             </li>
             <hr>
-            <li><a href="./index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
             <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
             <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
         </ul>
         <div id="auth-footer" class="auth-footer">
             <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
-                    class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
-            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;"><i
-                    class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    class="fas fa-sign-in-alt"></i>
+                Login / Sign Up</a>
+            <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;"
+                onclick="signoutfunc()"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
         </div>
     </nav>
     <div id="overlay" class="overlay"></div>
-    <!-- carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide  _carousel" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="./assets/banner1.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="./assets/banner2.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
+        <ol class="breadcrumb _breadcrumb">
+            <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item breadcrumb_item">Category</li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active">Search</li>
+        </ol>
+    </nav>
+
+    <h1 id="search_heading" class="section_heading">Search Results</h1>
+
+    <div id="searchResultsDiv" class="products_container">
     </div>
-    <!-- Main Content -->
-    <article>
-        <div class="category_main">
-            <div class="category_heading">All Categories</div>
-            <div id="category_div">
-            </div>
-        </div>
-        <div class="products_main">
-            <div class="products_heading">
-                Featured Products
-            </div>
-            <div id="products_div"></div>
-        </div>
-    </article>
-    <!-- Footer -->
+
     <footer class="site-footer">
         <div class="footer-container">
 
@@ -111,26 +95,27 @@
                 <div class="link-group">
                     <h4>Popular Categories</h4>
                     <ul>
-                        <li><a href="/category.html?name=Laptops">Laptops</a></li>
-                        <li><a href="/category.html?name=Motorcycle">Motorcycle</a></li>
-                        <li><a href="/category.html?name=Fragrances">Fragrances</a></li>
-                        <li><a href="/category.html?name=Mens%20Watches">Watches</a></li>
+                        <li><a href="./category.html?name=Laptops">Laptops</a></li>
+                        <li><a href="./category.html?name=Motorcycle">Motorcycle</a></li>
+                        <li><a href="./category.html?name=Fragrances">Fragrances</a></li>
+                        <li><a href="./category.html?name=Mens%20Watches">Watches</a></li>
                     </ul>
                 </div>
                 <div class="link-group">
                     <h4>Trending Searches</h4>
                     <ul>
-                        <li><a href="/category.html?name=Smartphones">Smartphones</a></li>
-                        <li><a href="/category.html?name=Tablets">Tablets</a></li>
-                        <li><a href="/category.html?name=Vehicle">Vehicle</a></li>
-                        <li><a href="/category.html?name=Beauty">Beauty</a></li>
+                        <li><a href="./category.html?name=Smartphones">Smartphones</a></li>
+                        <li><a href="./category.html?name=Tablets">Tablets</a></li>
+                        <li><a href="./category.html?name=Vehicle">Vehicle</a></li>
+                        <li><a href="./category.html?name=Beauty">Beauty</a></li>
                     </ul>
                 </div>
                 <div class="link-group">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="#">About Us</a></li>
                         <li><a href="#">Contact US</a></li>
+                        <li><a href="#">About Developer</a></li>
 
                     </ul>
                 </div>
@@ -139,7 +124,7 @@
                 <div class="social-media">
                     <h4>Follow Us</h4>
                     <div class="social-icons">
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
@@ -162,9 +147,10 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="app.js" type="module"></script>
-    <script src="navbar.js" type="module"></script>
-    <script type="module" src="./database.js"></script>
+    <script src="./navbar.js" type="module"></script>
+    <script src="./app.js" type="module"></script>
+    <script src="./database.js" type="module"></script>
+
 </body>
 
 </html>

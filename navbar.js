@@ -59,6 +59,37 @@ offCanvasMenu?.querySelectorAll('a').forEach(link => link.addEventListener('clic
 searchToggle?.addEventListener('click', openSearch);
 document.getElementById('close-search')?.addEventListener('click', closeSearch);
 
+function initSearch() {
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button"); // Ensure you have a button or icon with this ID inside your search bar
+
+    if (searchInput) {
+        // Trigger search on "Enter" key press
+        searchInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                performSearch(searchInput.value);
+            }
+        });
+    }
+
+    if (searchButton) {
+         // Trigger search on click
+        searchButton.addEventListener("click", function() {
+            performSearch(searchInput.value);
+        });
+    }
+}
+
+function performSearch(query) {
+    if (query && query.trim() !== "") {
+        // Redirect to search.html with the query as a parameter
+        window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+    }
+}
+
+// Initialize the listener
+initSearch();
 
 const checkSession = async () => {
     const getSession = await session();

@@ -400,3 +400,79 @@ async function signoutfunc() {
   window.location.reload();
 }
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
+
+async function getSearchResults() {
+  // Check if we are on the search page
+  if (window.location.pathname === "/search.html" || window.location.pathname === "/search") {
+    const searchResultsDiv = document.getElementById("searchResultsDiv");
+    const searchHeading = document.getElementById("search_heading");
+    const breadcrumbItemActive = document.getElementById("breadcrumb_item_active");
+
+    // 1. Get the query from the URL
+    const searchParams = new URLSearchParams(window.location.search);
+    const query = searchParams.get("q");
+
+    if (!query) return;
+
+    // Update UI Text
+    if (searchHeading) searchHeading.innerText = `Results for "${query}"`;
+    if (breadcrumbItemActive) breadcrumbItemActive.innerText = "Search Results";
+
+    // 2. Fetch data from Supabase
+    // We search in both 'title' AND 'description' using .or() and .ilike() (case insensitive)
+    const getData = async () => {
+      const { data, error } = await supabaseclient
+        .from('products')
+        .select()
+        .or(`title.ilike.%${query}%,description.ilike.%${query}%`); // Search logic
+
+      if (error) {
+        console.error("Search error:", error);
+        return [];
+      }
+      return data;
+    };
+
+    const products = await getData();
+
+    // 3. Render Results
+    if (searchResultsDiv) {
+      if (products.length === 0) {
+        searchResultsDiv.innerHTML = `<h3 class="no-results">No products found matching "${query}"</h3>`;
+        return;
+      }
+
+      // Reuse the exact same card HTML structure as your other functions for consistency
+      for (let i = 0; i < products.length; i++) {
+        searchResultsDiv.innerHTML += `
+                <div class="product"> <a class="product_inner" href="/details.html?id=${products[i].id}">
+                        <div class="product_image"><img src="${products[i].thumbnail}"/></div>
+                        <div class="product_details">
+                            <div class="product_title">${products[i].title}</div>
+                            <div class="product_descp">${products[i].description}</div>
+                            <div class="product_price">$${products[i].price}</div>
+                        </div>
+                    </a>
+                    <button class="addToCartBtn"
+                        data-id="${products[i].id}"
+                        data-title="${products[i].title}"
+                        data-price="${products[i].price}"
+                        data-image="${products[i].thumbnail}">
+                        <span class="IconContainer">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </span>
+                        <p class="text">Add To Cart</p>
+                    </button>
+                </div>`;
+      }
+
+      // Re-attach event listeners for the new buttons
+      document.querySelectorAll('.addToCartBtn').forEach(button => {
+        button.addEventListener('click', handleAddToCart);
+      });
+    }
+  }
+}
+
+// Call the function
+getSearchResults();
