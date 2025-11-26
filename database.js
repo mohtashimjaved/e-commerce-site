@@ -9,3 +9,19 @@ export async function session() {
     return data;
 }
 
+export async function signInWithGoogle() {
+    const { data, error } = await supabaseclient.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: 'https://dealio-site.netlify.app', 
+        },
+    });
+    if (error) {
+        console.error('Error signing in with Google:', error.message);
+    }
+    else {
+        // Handle successful sign-in (e.g., redirect to dashboard)
+        console.log('Signed in with Google:', data);
+    }
+}
+

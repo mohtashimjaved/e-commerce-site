@@ -1,4 +1,4 @@
-import {supabaseclient, session } from "./database.js";
+import {supabaseclient, session, signInWithGoogle } from "./database.js";
 
 // Initialize session check
 const checkSession = async () => {
@@ -13,6 +13,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const modifyText = document.getElementById("modify_text");
 const loginBtn = document.getElementById("login_btn");
+const googleBtn = document.getElementById("googleBtn")
 
 // Password strength indicator
 
@@ -54,3 +55,4 @@ async function signin(email, password) {
     return data;
 }
 loginBtn.addEventListener('click', login)
+googleBtn.addEventListener('click', signInWithGoogle)
