@@ -58,8 +58,8 @@ function updateSummary(cart) {
 
 // --- Cart Actions (Quantity & Delete) ---
 
-function handleQuantityChange(id, change) {
-    let cart = getCart();
+async function handleQuantityChange(id, change) {
+    let cart = await getCart();
     const itemIndex = cart.findIndex(item => item.id === id);
 
     if (itemIndex > -1) {
@@ -76,8 +76,8 @@ function handleQuantityChange(id, change) {
     }
 }
 
-function handleDeleteItem(id) {
-    let cart = getCart();
+async function handleDeleteItem(id) {
+    let cart = await getCart();
     // Filter out the item to be deleted
     cart = cart.filter(item => item.id !== id);
     saveCart(cart);

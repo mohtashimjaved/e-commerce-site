@@ -88,9 +88,11 @@ const checkSession = async () => {
 checkSession()
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
 
-export function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    // Sum the quantity of all items
+export async function updateCartCount() {
+    const {session: getSession} = await session();
+    const cartUserEmail = getSession.user.email;
+    const allCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const cart = allCart.filter(item => item.email == cartUserEmail);
     const totalItems = cart.length;
     
     if (cartCountElement) {
