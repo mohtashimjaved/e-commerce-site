@@ -101,7 +101,7 @@ const checkSession = async () => {
             userNameElement.style.textTransform = "capitalize"
             userEmailElement.innerText = email;
             
-            profileLi.style.display = 'block';
+
             ordersLi.style.display = 'block';
             
             signoutLink.style.display = 'flex';

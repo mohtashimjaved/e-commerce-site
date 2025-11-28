@@ -70,46 +70,62 @@
         </div>
     </nav>
     <div id="overlay" class="overlay"></div>
-    <!-- carousel -->
-        <main class="container my-5">
-        <h1 class="page-title animate__animated animate__fadeInDown">Our Story</h1>
+<main class="container my-5">
+        <h1 class="page-title animate__animated animate__fadeInDown">Get in Touch</h1>
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <section class="section-card about-section">
-                    <h2 class="section-title">Who We Are</h2>
-                    <p>Dealio was founded in 2025 with a simple mission: to connect customers with the best deals on quality products, making premium shopping accessible to everyone. We believe that great value shouldn't mean compromising on quality or experience.</p>
+                <section class="section-card contact-section p-4 p-md-5">
+                    <p class="text-center mb-4 text-muted">We're here to help! Whether you have a question about an order, our products, or just want to say hello, fill out the form below or use our direct contact info.</p>
                     
-                    <h2 class="section-title mt-4">Our Values</h2>
                     <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="value-box">
-                                <i class="fas fa-gem icon-large"></i>
-                                <h3>Quality</h3>
-                                <p>We meticulously select our products to ensure you receive only the best.</p>
-                            </div>
+                        <div class="col-md-6 mb-4">
+                            <h2 class="section-title mb-3">Send Us a Message</h2>
+                            <form id="contact-form">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="cta-button w-100">Send Inquiry</button>
+                            </form>
+                            <div id="contact-message" class="mt-3 text-center" style="display: none;"></div>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="value-box">
-                                <i class="fas fa-tag icon-large"></i>
-                                <h3>Value</h3>
-                                <p>Our commitment is to unbeatable prices without hidden costs.</p>
+
+                        <div class="col-md-6">
+                            <h2 class="section-title mb-3">Direct Contact Info</h2>
+                            <div class="info-box">
+                                <p><i class="fas fa-map-marker-alt icon-medium"></i> <strong>Headquarters:</strong> 123 Deal Street, Commerce City, 90210</p>
+                                <p><i class="fas fa-phone icon-medium"></i> <strong>Phone:</strong> +1 (800) 555-DEAL</p>
+                                <p><i class="fas fa-envelope icon-medium"></i> <strong>Email:</strong> support@dealio.com</p>
+                                <p><i class="fas fa-clock icon-medium"></i> <strong>Hours:</strong> Mon - Fri, 9:00 AM - 5:00 PM (PST)</p>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="value-box">
-                                <i class="fas fa-heart icon-large"></i>
-                                <h3>Customer Focus</h3>
-                                <p>Your satisfaction is our top priority. We're here to help every step of the way.</p>
+
+                            <h2 class="section-title mt-4 mb-3">Follow Us</h2>
+                            <div class="social-icons-large">
+                                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                     </div>
-
-                    <h2 class="section-title mt-4">Our Commitment</h2>
-                    <p>From the moment you browse our selection to the day your order arrives, we strive for excellence. We are constantly searching for new and exciting products and committed to improving our service based on your feedback. Thank you for choosing Dealio!</p>
                 </section>
             </div>
         </div>
     </main>
+
+        
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">

@@ -476,3 +476,137 @@ async function getSearchResults() {
 
 // Call the function
 getSearchResults();
+
+// -- My Orders Page Functionality --
+async function getOrders() {
+  const ordersContainer = document.getElementById('orders-container');
+  if (window.location.pathname === "/myorders.html" && ordersContainer) {
+    const loadingIndicator = document.getElementById('orders-loading');
+    loadingIndicator.style.display = 'block'; // Show loading
+    ordersContainer.innerHTML = ''; // Clear container
+
+    try {
+      const getSession = await session();
+      const user = getSession?.session?.user;
+
+      if (!user) {
+        // Redirect or show message if not logged in
+        ordersContainer.innerHTML = `
+                    <div class="no-orders-state animate__animated animate__fadeInUp">
+                        <i class="fas fa-user-lock no-orders-icon"></i>
+                        <h2 class="no-orders-title">Please Sign In to View Your Orders</h2>
+                        <p class="no-orders-text">Your personalized order history will appear here once you are logged in.</p>
+                        <a href="/login.html" class="cta-button no-orders-btn">Sign In / Register</a>
+                    </div>
+                `;
+        return;
+      }
+
+      const { data: orders, error } = await supabaseclient
+        .from('orders') // Assuming a table named 'orders'
+        .select()
+        .eq('user_email', user.email) // Filter by the currently logged-in user's ID
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error("Error fetching orders:", error);
+        ordersContainer.innerHTML = '<p class="text-danger text-center p-5">Failed to load orders. Please try again later.</p>';
+        return;
+      }
+
+      if (orders.length === 0) {
+        // **Special No Orders Design**
+        ordersContainer.innerHTML = `
+                    <div class="no-orders-state animate__animated animate__fadeInUp">
+                        <i class="fas fa-box-open no-orders-icon"></i>
+                        <h2 class="no-orders-title">You Haven't Placed Any Orders Yet!</h2>
+                        <p class="no-orders-text">It looks like your order history is empty. Start shopping now to find amazing deals.</p>
+                        <a href="/index.html" class="cta-button no-orders-btn">Start Shopping</a>
+                    </div>
+                `;
+        return;
+      }
+
+      // Orders found, display them
+      ordersContainer.innerHTML = orders.map(order => {
+        // Format date for better readability
+        const orderDate = new Date(order.created_at).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+        // Assuming 'items' is a JSON array in the Supabase order table
+        console.log(order);
+        
+        const items = JSON.parse(order.items) || [];
+        const totalQuantity = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+        return `
+                    <div class="order-card animate__animated animate__fadeIn">
+                        <div class="order-header">
+                            <div class="header-left">
+                                <span class="order-label">Order ID:</span>
+                                <span class="order-value order-id">#${order.order_id}</span>
+                            </div>
+                            <div class="header-right">
+                                <span class="order-status order-status-${order.status.toLowerCase()}">${order.status}</span>
+                            </div>
+                        </div>
+                        <div class="order-details-summary">
+                            <p><span class="summary-label">Date Placed:</span> ${orderDate}</p>
+                            <p><span class="summary-label">Total Items:</span> ${totalQuantity}</p>
+                            <p><span class="summary-label">Order Total:</span> <span class="total-price">$${order.total_amount ? order.total_amount.toFixed(2) : '0.00'}</span></p>
+                        </div>
+                        <div class="order-items-preview">
+                            ${items.slice(0, 3).map(item => `
+                                <div class="item-preview">
+                                    <img src="${item.image || 'https://placehold.co/40x40/9a26ba/ffffff?text=P'}" alt="${item.title}" class="item-thumbnail">
+                                    <span class="item-title">${item.title}</span>
+                                </div>
+                            `).join('')}
+                            ${items.length > 3 ? `<span class="more-items">+${items.length - 3} more items</span>` : ''}
+                        </div>
+                        <a href="#" class="order-view-details">View Order Details <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                `;
+      }).join('');
+
+    } catch (error) {
+      console.error("Error during order process:", error);
+      ordersContainer.innerHTML = '<p class="text-danger text-center p-5">An unexpected error occurred. Please try again.</p>';
+    } finally {
+      if (loadingIndicator) {
+        loadingIndicator.style.display = 'none'; // Hide loading
+      }
+    }
+  }
+}
+
+// Call the new function for the My Orders page
+getOrders();
+
+// -- Contact Form Handler for contact.html --
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.getElementById('contact-form');
+  const contactMessage = document.getElementById('contact-message');
+
+  if (contactForm && contactMessage) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Get form data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      // Simple submission feedback (since there's no backend endpoint to save to a contacts table)
+      contactMessage.style.display = 'block';
+      contactMessage.classList.remove('text-danger');
+      contactMessage.classList.add('text-success');
+      contactMessage.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been sent. We will respond to <strong>${email}</strong> shortly.`;
+      contactForm.reset();
+
+      // Optional: Log data for dev inspection
+      console.log('Contact Form Submission:', { name, email, subject, message });
+    });
+  }
+});
