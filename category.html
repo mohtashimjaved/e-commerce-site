@@ -26,58 +26,60 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i
+                    class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
-            </div>
+        </div>
     </header>
-        <!-- Search bar Section -->
-        <section id="search-bar-section" class="search-bar-section animate__animated">
-            <div class="search-container">
-                <input type="text" placeholder="Search products, collections, and more..." class="search-input">
-                <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
-                <button id="close-search" class="close-search" aria-label="Close Search"><i class="fas fa-times"></i></button>
+    <!-- Search bar Section -->
+    <section id="search-bar-section" class="search-bar-section animate__animated">
+        <div class="search-container">
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input">
+            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
+            <button id="close-search" class="close-search" aria-label="Close Search"><i
+                    class="fas fa-times"></i></button>
+        </div>
+    </section>
+    <!-- Off Canvas Menu -->
+    <nav id="off-canvas-menu" class="off-canvas main-nav">
+        <div class="menu-header">
+            <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <div id="user-info-section" class="user-info-section">
+            <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div id="user-name" class="user-name">Guest User</div>
+                <div id="user-email" class="user-email">Please log in or sign up.</div>
             </div>
-        </section>
-        <!-- Off Canvas Menu -->
-        <nav id="off-canvas-menu" class="off-canvas main-nav">
-            <div class="menu-header">
-                <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="user-info-section" class="user-info-section">
-                <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                    <div id="user-name" class="user-name">Guest User</div>
-                    <div id="user-email" class="user-email">Please log in or sign up.</div>
-                </div>
-            </div>
-            <ul class="main-menu-list">
-                <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i
-                            class="fas fa-user-cog"></i> My Profile</a></li>
-                            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
-                            class="fas fa-clipboard-list"></i> My Orders</a>
-                </li>
-                <hr>
-                <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
-                <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
-                <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
-            </ul>
-            <div id="auth-footer" class="auth-footer">
-                <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i class="fas fa-sign-in-alt"></i>
-                    Login / Sign Up</a>
-                <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;" onclick="signoutfunc()"><i
-                        class="fas fa-sign-out-alt"></i> Sign Out</a>
-            </div>
-        </nav>
-        <div id="overlay" class="overlay"></div>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
-            <ol class="breadcrumb _breadcrumb">
-                <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item breadcrumb_item">Category</li>
-                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active"></li>
-            </ol>
-        </nav>
+        </div>
+        <ul class="main-menu-list">
+            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
+                        class="fas fa-clipboard-list"></i> My Orders</a>
+            </li>
+            <hr>
+            <li><a href="./index.html" active><i class="fas fa-bolt"></i>Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+        </ul>
+        <div id="auth-footer" class="auth-footer">
+            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
+                    class="fas fa-sign-in-alt"></i>
+                Login / Sign Up</a>
+            <a id="signout-link" href="#" class="auth-footer-link signout-link" style="display: none;"
+                onclick="signoutfunc()"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+    </nav>
+    <div id="overlay" class="overlay"></div>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="breadcrumb_div">
+        <ol class="breadcrumb _breadcrumb">
+            <li class="breadcrumb-item breadcrumb_item"><a href="./index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item breadcrumb_item">Category</li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb_item_active"></li>
+        </ol>
+    </nav>
     <article>
         <div class="category_main">
             <div class="category_heading">All Categories</div>
