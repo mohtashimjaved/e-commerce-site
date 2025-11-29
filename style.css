@@ -1458,197 +1458,331 @@ select {
     color: white; /* Keep text white on hover */
 }
 
-/* My Orders Page Styles */
-.orders-container {
+
+
+/* --- New Styles for My Orders Page (Next Level UI) --- */
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #9a26ba; /* Primary brand color underline */
+    text-transform: uppercase;
+}
+
+.orders-list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    padding: 20px 0;
+    margin-bottom: 80px;
 }
 
 .order-card {
     background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
     padding: 25px;
-    border-left: 5px solid #9a26ba; /* Primary theme accent */
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .order-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(154, 38, 186, 0.2); /* Lift and glow effect */
 }
 
 .order-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
-.order-label {
-    font-weight: 500;
-    color: #777;
-    font-size: 0.9rem;
-}
-
 .order-id {
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #444;
-    font-size: 1.1rem;
+    color: #601675; /* Darker brand color */
 }
 
 .order-status {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 20px;
     font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
+    font-size: 0.85rem;
+    color: white;
+    text-align: center;
+    min-width: 100px;
 }
 
-.order-status-pending {
-    background-color: #ffc107; /* Yellow */
-}
-
-.order-status-shipped {
-    background-color: #0d6efd; /* Blue */
-}
-
-.order-status-delivered {
-    background-color: #198754; /* Green */
-}
-
-.order-status-cancelled {
-    background-color: #dc3545; /* Red */
-}
+/* Status Colors (Existing, but improved design) */
+.order-status-processing { background-color: #ffc107; } /* Yellow */
+.order-status-shipped { background-color: #0d6efd; } /* Blue */
+.order-status-delivered { background-color: #198754; } /* Green */
+.order-status-cancelled { background-color: #dc3545; } /* Red */
 
 .order-details-summary p {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 0.95rem;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 5px;
-}
-
-.summary-label {
-    font-weight: 500;
     color: #555;
 }
 
-.total-price {
+.order-total {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #333;
+    margin-top: 10px;
+}
+
+.order-view-details-btn {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #9a26ba; /* Primary brand color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.order-view-details-btn:hover {
+    background-color: #601675; /* Darker hover state */
+    transform: translateY(-1px);
+}
+
+/* Loader Styling */
+.loader-container {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.loader-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #9a26ba; /* Primary color spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px auto;
+}
+
+.loader-text {
+    color: #601675;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Modal Styling Improvements (Next Level) */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.modal-title {
+    color: #601675;
+    font-weight: 700;
+}
+
+/* Item List in Modal */
+.modal-order-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-order-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.item-quantity {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.item-price {
     font-weight: 700;
     color: #9a26ba;
 }
+.about-hero {
+    background: linear-gradient(90deg, #9a26baee 0%, #601675ee 100%); /* Branded Gradient Overlay */
+    color: white;
+    padding: 60px 30px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
 
-.order-items-preview {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+.about-hero h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.about-hero p {
+    font-size: 1.15rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.about-section {
+    padding: 40px 0;
+    margin-bottom: 40px;
+    /* Optional: Add a subtle background to alternate sections */
+}
+
+.about-section h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #601675;
+    margin-bottom: 25px;
+    border-left: 5px solid #9a26ba;
+    padding-left: 15px;
+}
+
+.feature-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(154, 38, 186, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #9a26ba;
     margin-bottom: 15px;
 }
 
-.item-preview {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
-.item-thumbnail {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.item-title {
-    font-size: 0.85rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100px;
-    color: #444;
-}
-
-.more-items {
-    font-size: 0.85rem;
-    color: #9a26ba;
+.feature-card h4 {
     font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-.order-view-details {
-    display: block;
-    text-align: right;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #9a26ba;
-    transition: color 0.3s;
-}
+/* --- New Styles for Contact Page (Next Level UI) --- */
 
-.order-view-details:hover {
-    color: #7d1f99;
-}
-
-/* Special No Orders State Design */
-.no-orders-state {
-    text-align: center;
-    padding: 80px 30px;
-    background: linear-gradient(135deg, #ffffff, #f0e6ff); /* Light gradient background */
+.contact-container {
+    background-color: #fff;
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(154, 38, 186, 0.15);
-    max-width: 600px;
-    margin: 40px auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 80px;
+    overflow: hidden;
 }
 
-.no-orders-icon {
-    font-size: 4rem;
-    color: #9a26ba;
-    margin-bottom: 20px;
-    animation: bounceIn 1s ease-out;
+.contact-info-panel {
+    background-color: #f8f8f8; /* Light gray background for contrast */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.no-orders-title {
-    color: #444;
+.contact-info-panel h3 {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.no-orders-text {
-    color: #777;
-    font-size: 1.1rem;
+    color: #601675;
     margin-bottom: 30px;
 }
 
-.no-orders-btn {
-    padding: 12px 30px;
+.contact-detail {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: #9a26ba;
+    margin-right: 20px;
+    min-width: 30px;
+    padding-top: 5px;
+}
+
+.contact-text-content h5 {
     font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(154, 38, 186, 0.4);
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-@keyframes bounceIn {
-    0% {
-        transform: scale(0.3);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-    70% {
-        transform: scale(0.9);
-    }
-    100% {
-        transform: scale(1);
-    }
+.contact-text-content p {
+    margin: 0;
+    color: #666;
 }
 
+.contact-form-panel {
+    padding: 50px;
+}
+
+.contact-form-panel h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Form field styling enhancement */
+.form-control:focus {
+    border-color: #9a26ba;
+    box-shadow: 0 0 0 0.25rem rgba(154, 38, 186, 0.25);
+}
+
+/* Submit button styling consistent with theme */
+.contact-submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #9a26ba; /* Primary brand color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.contact-submit-btn:hover {
+    background-color: #601675; /* Darker hover state */
+    transform: translateY(-1px);
+}

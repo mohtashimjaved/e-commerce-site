@@ -477,107 +477,173 @@ async function getSearchResults() {
 // Call the function
 getSearchResults();
 
-// -- My Orders Page Functionality --
 async function getOrders() {
-  const ordersContainer = document.getElementById('orders-container');
-  if (window.location.pathname === "/myorders.html" && ordersContainer) {
-    const loadingIndicator = document.getElementById('orders-loading');
-    loadingIndicator.style.display = 'block'; // Show loading
-    ordersContainer.innerHTML = ''; // Clear container
+    const ordersContainer = document.getElementById('orders-container');
+    const loadingIndicator = document.getElementById('orders-loader');
+    const orderModal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+    const modalBody = document.getElementById('order-modal-body');
+
+    if (window.location.pathname !== "/myorders.html" && window.location.pathname !== "/myorders") {
+        return; // Only run on the myorders page
+    }
+
+    // 1. Show Loader
+    if (loadingIndicator) {
+        loadingIndicator.style.display = 'block';
+    }
+    if (ordersContainer) {
+        ordersContainer.innerHTML = '';
+    }
 
     try {
-      const getSession = await session();
-      const user = getSession?.session?.user;
+        const { session: getSession } = await session();
+        const user = getSession?.user;
 
-      if (!user) {
-        // Redirect or show message if not logged in
-        ordersContainer.innerHTML = `
-                    <div class="no-orders-state animate__animated animate__fadeInUp">
-                        <i class="fas fa-user-lock no-orders-icon"></i>
-                        <h2 class="no-orders-title">Please Sign In to View Your Orders</h2>
-                        <p class="no-orders-text">Your personalized order history will appear here once you are logged in.</p>
-                        <a href="/login.html" class="cta-button no-orders-btn">Sign In / Register</a>
+        if (!user) {
+            // Show Sign In state and hide loader
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            ordersContainer.innerHTML = `
+                <div class="no-orders-state animate__animated animate__fadeInUp">
+                    <i class="fas fa-user-lock no-orders-icon"></i>
+                    <h2 class="no-orders-title">Please Sign In to View Your Orders</h2>
+                    <p class="no-orders-text">Your personalized order history will appear here once you are logged in.</p>
+                    <a href="/login.html" class="cta-button no-orders-btn">Sign In / Register</a>
+                </div>
+            `;
+            return;
+        }
+
+        // Simulate fetching data (Replace with actual Supabase fetch logic)
+        // NOTE: The previous app.js snippet was calling this. Assuming the data structure based on typical e-commerce needs.
+        const { data: orders, error } = await supabaseclient
+            .from('orders')
+            .select('*') // Select all columns
+            .eq('user_email', user.email)
+            .order('created_at', { ascending: false }); // Sort by newest first
+
+        if (error) {
+            console.error('Error fetching orders:', error);
+            ordersContainer.innerHTML = '<p class="text-danger text-center p-5">An unexpected error occurred. Please try again.</p>';
+            return;
+        }
+
+        if (orders.length === 0) {
+            // Show No Orders state
+            ordersContainer.innerHTML = `
+                <div class="no-orders-state animate__animated animate__fadeInUp">
+                    <i class="fas fa-box-open no-orders-icon"></i>
+                    <h2 class="no-orders-title">You haven't placed any orders yet!</h2>
+                    <p class="no-orders-text">Start shopping today and your order history will show up here.</p>
+                    <a href="/index.html" class="cta-button no-orders-btn">Start Shopping</a>
+                </div>
+            `;
+            return;
+        }
+
+        // 2. Render Orders List
+        orders.forEach(order => {
+            const date = new Date(order.created_at).toLocaleDateString();
+            const time = new Date(order.created_at).toLocaleTimeString();
+            const statusClass = `order-status-${order.status.toLowerCase()}`;
+            
+            // Format total_amount to two decimal places
+            const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
+
+            // Get first few items for summary display
+            const itemsSummary = JSON.parse(order.items).slice(0, 2).map(item => item.title).join(', ');
+            const moreItemsCount = JSON.parse(order.items).length > 2 ? `... and ${JSON.parse(order.items).length - 2} more item(s)` : '';
+
+            ordersContainer.innerHTML += `
+                <div class="order-card animate__animated animate__fadeInUp" data-id="${order.order_id}">
+                    <div class="order-header">
+                        <span class="order-id">Order #${order.order_id.toUpperCase()}</span>
+                        <span class="order-status ${statusClass}">${order.status}</span>
                     </div>
-                `;
-        return;
-      }
-
-      const { data: orders, error } = await supabaseclient
-        .from('orders') // Assuming a table named 'orders'
-        .select()
-        .eq('user_email', user.email) // Filter by the currently logged-in user's ID
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error("Error fetching orders:", error);
-        ordersContainer.innerHTML = '<p class="text-danger text-center p-5">Failed to load orders. Please try again later.</p>';
-        return;
-      }
-
-      if (orders.length === 0) {
-        // **Special No Orders Design**
-        ordersContainer.innerHTML = `
-                    <div class="no-orders-state animate__animated animate__fadeInUp">
-                        <i class="fas fa-box-open no-orders-icon"></i>
-                        <h2 class="no-orders-title">You Haven't Placed Any Orders Yet!</h2>
-                        <p class="no-orders-text">It looks like your order history is empty. Start shopping now to find amazing deals.</p>
-                        <a href="/index.html" class="cta-button no-orders-btn">Start Shopping</a>
+                    <div class="order-details-summary">
+                        <p><strong><i class="fas fa-calendar-alt"></i> Date:</strong> ${date} at ${time}</p>
+                        <p><strong><i class="fas fa-list-ul"></i> Items:</strong> ${itemsSummary}${moreItemsCount}</p>
                     </div>
-                `;
-        return;
-      }
-
-      // Orders found, display them
-      ordersContainer.innerHTML = orders.map(order => {
-        // Format date for better readability
-        const orderDate = new Date(order.created_at).toLocaleDateString('en-US', {
-          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                        <span class="order-total">Total: $${total}</span>
+                        <button class="order-view-details-btn" data-order-id="${order.order_id}">
+                            <i class="fas fa-eye me-2"></i>View Order Details
+                        </button>
+                    </div>
+                </div>
+            `;
         });
-        // Assuming 'items' is a JSON array in the Supabase order table
-        console.log(order);
-        
-        const items = JSON.parse(order.items) || [];
-        const totalQuantity = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
-        return `
-                    <div class="order-card animate__animated animate__fadeIn">
-                        <div class="order-header">
-                            <div class="header-left">
-                                <span class="order-label">Order ID:</span>
-                                <span class="order-value order-id">#${order.order_id}</span>
-                            </div>
-                            <div class="header-right">
-                                <span class="order-status order-status-${order.status.toLowerCase()}">${order.status}</span>
-                            </div>
-                        </div>
-                        <div class="order-details-summary">
-                            <p><span class="summary-label">Date Placed:</span> ${orderDate}</p>
-                            <p><span class="summary-label">Total Items:</span> ${totalQuantity}</p>
-                            <p><span class="summary-label">Order Total:</span> <span class="total-price">$${order.total_amount ? order.total_amount.toFixed(2) : '0.00'}</span></p>
-                        </div>
-                        <div class="order-items-preview">
-                            ${items.slice(0, 3).map(item => `
-                                <div class="item-preview">
-                                    <img src="${item.image || 'https://placehold.co/40x40/9a26ba/ffffff?text=P'}" alt="${item.title}" class="item-thumbnail">
-                                    <span class="item-title">${item.title}</span>
-                                </div>
-                            `).join('')}
-                            ${items.length > 3 ? `<span class="more-items">+${items.length - 3} more items</span>` : ''}
-                        </div>
-                        <a href="#" class="order-view-details">View Order Details <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                `;
-      }).join('');
+        // 3. Attach Event Listeners for Modal
+        document.querySelectorAll('.order-view-details-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const orderId = e.target.getAttribute('data-order-id');
+                console.log(orderId);
+                
+                const selectedOrder = orders.find(o => o.order_id === orderId);
+                if (selectedOrder) {
+                    populateOrderModal(selectedOrder, modalBody);
+                    orderModal.show();
+                }
+            });
+        });
 
-    } catch (error) {
-      console.error("Error during order process:", error);
-      ordersContainer.innerHTML = '<p class="text-danger text-center p-5">An unexpected error occurred. Please try again.</p>';
+    } catch (e) {
+        console.error("Critical error in getOrders:", e);
+        ordersContainer.innerHTML = '<p class="text-danger text-center p-5">A critical error occurred while loading your orders.</p>';
     } finally {
-      if (loadingIndicator) {
-        loadingIndicator.style.display = 'none'; // Hide loading
-      }
+        // 4. Hide Loader
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+        }
     }
-  }
+}
+
+/**
+ * Populates the Order Details Modal with specific order information.
+ * @param {object} order - The order object.
+ * @param {HTMLElement} modalBody - The modal body element to inject content into.
+ */
+function populateOrderModal(order, modalBody) {
+    // Helper function for status styling
+    const statusClass = `order-status-${order.status.toLowerCase()}`;
+    
+    // Format date and total
+    const date = new Date(order.created_at).toLocaleDateString();
+    const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
+
+    let itemsHtml = JSON.parse(order.items).map(item => `
+        <div class="modal-order-item">
+            <span class="item-name">${item.title}</span>
+            <span class="item-quantity">Qty: ${item.quantity}</span>
+            <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+    `).join('');
+
+    // Detailed HTML structure for the modal body
+    modalBody.innerHTML = `
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <p><strong>Order ID:</strong> #${order.order_id.toUpperCase()}</p>
+                <p><strong>Order Date:</strong> ${date}</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p><strong>Status:</strong> <span class="order-status ${statusClass} d-inline-block">${order.status}</span></p>
+                <h4 class="mt-2"><strong>Total Paid:</strong> <span class="text-success">$${total}</span></h4>
+            </div>
+        </div>
+
+        <h6 class="modal-title-small text-muted mb-3 border-bottom pb-2"><i class="fas fa-box me-2"></i>Items Ordered (${JSON.parse(order.items).length})</h6>
+        <div class="order-items-list mb-4">
+            ${itemsHtml}
+        </div>
+
+        <h6 class="modal-title-small text-muted mb-3 border-bottom pb-2"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h6>
+        <p class="mb-1">${order.shipping_address?.name || 'N/A'}</p>
+        <p class="mb-1">${order.shipping_address?.street || 'N/A'}, ${order.shipping_address?.city || 'N/A'}</p>
+        <p class="mb-1">${order.shipping_address?.state || 'N/A'}, ${order.shipping_address?.zip_code || 'N/A'}, ${order.shipping_address?.country || 'N/A'}</p>
+    `;
 }
 
 // Call the new function for the My Orders page

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Dealio</title>
+    <title>My Orders | Dealio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -14,7 +14,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <header class="main-header">
         <div class="header-left">
             <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
@@ -28,57 +27,33 @@
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
             <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
             </div>
     </header>
 
-    <section id="search-bar-section" class="search-bar-section animate__animated">
-        <div class="search-container">
-            <input type="text" placeholder="Search products, collections, and more..." class="search-input" id="search-input">
-            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
-            <button id="close-search" class="close-search" aria-label="Close Search"><i
-                    class="fas fa-times"></i></button>
-        </div>
-    </section>
-    <nav id="off-canvas-menu" class="off-canvas main-nav">
-        <div class="menu-header">
-            <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i
-                    class="fas fa-times"></i></button>
-        </div>
-        <div id="user-info-section" class="user-info-section">
-            <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
-            <div class="user-info">
-                <div id="user-name" class="user-name">Guest User</div>
-                <div id="user-email" class="user-email">Please log in or sign up.</div>
+    <main class="page-content container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_div mt-4">
+                    <ol class="_breadcrumb">
+                        <li class="breadcrumb_item"><a href="/index.html">Home</a></li>
+                        <li class="breadcrumb_item">&nbsp;/&nbsp;</li>
+                        <li class="breadcrumb_item" id="breadcrumb_item_active">My Orders</li>
+                    </ol>
+                </div>
             </div>
         </div>
-        <ul class="main-menu-list">
-            <li id="orders-li" class="user-section-link" style="display: none;"><a href="#orders"><i
-                        class="fas fa-clipboard-list"></i> My Orders</a>
-            </li>
-            <hr>
-            <li><a href="./index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
-            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
-        </ul>
-        <div id="auth-footer" class="auth-footer">
-            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
-                    class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
-            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;"><i
-                    class="fas fa-sign-out-alt"></i> Sign Out</a>
+        
+        <h1 class="page-title animate__animated animate__fadeInUp">Your Order History</h1>
+
+        <div id="orders-loader" class="loader-container">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Loading your past orders...</p>
         </div>
-    </nav>
-    <div id="overlay" class="overlay"></div>
-<main class="container my-5">
-        <h1 class="page-title animate__animated animate__fadeInDown">Your Order History</h1>
-        <div id="orders-container" class="orders-container">
-            <!-- Orders will be dynamically loaded here by app.js -->
-            <div id="orders-loading" class="text-center p-5">
-                <i class="fas fa-spinner fa-spin fa-3x" style="color: #9a26ba;"></i>
-                <p class="mt-3 text-muted">Loading your orders...</p>
+
+        <div id="orders-container" class="orders-list-container">
             </div>
-        </div>
     </main>
         
     <!-- Footer -->
@@ -134,6 +109,21 @@
                     </div>
                 </div>
     </footer>
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="order-modal-body">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://kit.fontawesome.com/a7577e03bc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
