@@ -3,10 +3,13 @@ import { supabaseclient, session } from './database.js' // Assuming navbar.js is
 
 const form = document.getElementById('buyerInfoForm');
 const modalOverlay = document.getElementById('successModalOverlay');
+const useremail = localStorage.getItem("currentUser")
+console.log(useremail)
+document.getElementById('email').value = useremail
+document.getElementById('email').disabled = true
 
 if (form) {
     // return;
-
 
     form.addEventListener('submit', handleConfirmOrder);
 
@@ -18,13 +21,15 @@ if (form) {
             return;
         }
 
-        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cartItems = cart.filter(item => item.email == useremail)
 
         if (cartItems.length === 0) {
             alert("Your cart is empty. Please add items before placing an order.");
             window.location.href = '/index.html'; // Redirect to home or products
             return;
         }
+
 
         // 1. Gather User Information
         const buyerInfo = {
@@ -70,6 +75,9 @@ if (form) {
 
 
         localStorage.removeItem('cartItems');
+        const cartItemsTosave = cart.filter(item => item.email != useremail)
+        console.log(cartItemsTosave)
+        localStorage.setItem('cartItems', JSON.stringify(cartItemsTosave));
         updateCartCount(); // Function from navbar.js
 
         showSuccessModal();

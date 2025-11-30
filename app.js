@@ -480,7 +480,7 @@ getSearchResults();
 async function getOrders() {
     const ordersContainer = document.getElementById('orders-container');
     const loadingIndicator = document.getElementById('orders-loader');
-    const orderModal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+    const orderModal = document.getElementById('orderDetailsModal');
     const modalBody = document.getElementById('order-modal-body');
 
     if (window.location.pathname !== "/myorders.html" && window.location.pathname !== "/myorders") {
@@ -567,7 +567,7 @@ async function getOrders() {
                     </div>
                     <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
                         <span class="order-total">Total: $${total}</span>
-                        <button class="order-view-details-btn" data-order-id="${order.order_id}">
+                        <button class="order-view-details-btn" ="${order.order_id}">
                             <i class="fas fa-eye me-2"></i>View Order Details
                         </button>
                     </div>

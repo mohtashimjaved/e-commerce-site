@@ -6,6 +6,8 @@ export async function session() {
         console.log(error);
     }
     console.log(data);
+    const useremail = data.session.user.email
+    localStorage.setItem("currentUser" , useremail)
     return data;
 }
 
