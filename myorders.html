@@ -31,31 +31,90 @@
             </a>
             </div>
     </header>
+    <section id="search-bar-section" class="search-bar-section animate__animated">
+        <div class="search-container">
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input" id="search-input">
+            <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
+            <button id="close-search" class="close-search" aria-label="Close Search"><i
+                    class="fas fa-times"></i></button>
+        </div>
+    </section>
+    <nav id="off-canvas-menu" class="off-canvas main-nav">
+        <div class="menu-header">
+            <button id="close-main-menu" class="close-button" aria-label="Close Menu"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <div id="user-info-section" class="user-info-section">
+            <img src="./assets/favicon.ico" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div id="user-name" class="user-name">Guest User</div>
+                <div id="user-email" class="user-email">Please log in or sign up.</div>
+            </div>
+        </div>
+        <ul class="main-menu-list">
+            <!-- <li id="profile-li" class="user-section-link" style="display: none;"><a href="#profile"><i
+                        class="fas fa-user-cog"></i> My Profile</a></li> -->
+            <li id="orders-li" class="user-section-link" style="display: none;"><a href="./myorders.html"><i
+                        class="fas fa-clipboard-list"></i> My Orders</a>
+            </li>
+            <hr>
+            <li><a href="./index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+        </ul>
+        <div id="auth-footer" class="auth-footer">
+            <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
+                    class="fas fa-sign-in-alt"></i>Login / Sign Up</a>
+            <a id="signout-link" class="auth-footer-link signout-link" style="display: none;"><i
+                    class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+    </nav>
+    <div id="overlay" class="overlay"></div>
 
-    <main class="page-content container">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb_div mt-4">
-                    <ol class="_breadcrumb">
-                        <li class="breadcrumb_item"><a href="/index.html">Home</a></li>
-                        <li class="breadcrumb_item">&nbsp;/&nbsp;</li>
-                        <li class="breadcrumb_item" id="breadcrumb_item_active">My Orders</li>
-                    </ol>
+   <div class="orders-page-container">
+        <h1 class="page-title">My Order History <i class="fas fa-history primary-color"></i></h1>
+        <p class="page-subtitle">Review the status and details of your past purchases.</p>
+
+        <div id="orders-wrapper">
+            <div id="orders-loader" class="page-state loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p class="loader-text">Fetching your orders...</p>
+            </div>
+
+            <div id="orders-container" class="order-grid">
                 </div>
+
+            <div id="orders-signin-state" class="page-state signin-state" style="display: none;">
+                <i class="fas fa-user-lock state-icon"></i>
+                <h2 class="state-title">Please Sign In to View Your Orders</h2>
+                <p class="state-text">Your personalized order history will appear here once you are logged in.</p>
+                <a href="/login.html" class="custom-button primary-button">Sign In / Register</a>
+            </div>
+
+            <div id="orders-no-orders-state" class="page-state no-orders-state" style="display: none;">
+                <i class="fas fa-box-open state-icon"></i>
+                <h2 class="state-title">You haven't placed any orders yet!</h2>
+                <p class="state-text">Start shopping today and your order history will show up here.</p>
+                <a href="/index.html" class="custom-button success-button"><i class="fas fa-shopping-bag"></i>Start Shopping</a>
             </div>
         </div>
         
-        <h1 class="page-title animate__animated animate__fadeInUp">Your Order History</h1>
+    </div>
 
-        <div id="orders-loader" class="loader-container">
-            <div class="loader-spinner"></div>
-            <p class="loader-text">Loading your past orders...</p>
-        </div>
-
-        <div id="orders-container" class="orders-list-container">
+    <div class="custom-modal-overlay" id="orderDetailsModalOverlay">
+        <div class="custom-modal-content" id="orderDetailsModal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderDetailsModalLabel"><i class="fas fa-receipt"></i>Order Details</h5>
+                <button type="button" class="btn-close-manual" aria-label="Close"></button>
             </div>
-    </main>
-        
+            <div class="modal-body" id="order-modal-body">
+                <p class="text-center text-muted">Loading details...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-button secondary-button btn-close-manual">Close</button>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
@@ -130,8 +189,8 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="app.js" type="module"></script>
-    <script src="navbar.js" type="module"></script>
+    <script src="./navbar.js" type="module"></script>
+    <script src="./app.js" type="module"></script>
     <script type="module" src="./database.js"></script>
 </body>
 
