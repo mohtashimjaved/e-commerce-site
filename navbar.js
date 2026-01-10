@@ -65,7 +65,7 @@ function initSearch() {
 
     if (searchInput) {
         // Trigger search on "Enter" key press
-        searchInput.addEventListener("keypress", function(event) {
+        searchInput.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
                 performSearch(searchInput.value);
@@ -74,8 +74,8 @@ function initSearch() {
     }
 
     if (searchButton) {
-         // Trigger search on click
-        searchButton.addEventListener("click", function() {
+        // Trigger search on click
+        searchButton.addEventListener("click", function () {
             performSearch(searchInput.value);
         });
     }
@@ -94,24 +94,24 @@ initSearch();
 const checkSession = async () => {
     const getSession = await session();
     if (getSession.session) {
-        const name =  getSession.session.user.user_metadata.name
+        const name = getSession.session.user.user_metadata.name
         const email = getSession.session.user.user_metadata.email
-        if(userNameElement && userEmailElement){
+        if (userNameElement && userEmailElement) {
             userNameElement.innerText = name;
             userNameElement.style.textTransform = "capitalize"
             userEmailElement.innerText = email;
-            
+
 
             ordersLi.style.display = 'block';
-            
+
             signoutLink.style.display = 'flex';
             loginLink.style.display = 'none';
         }
     }
     else {
-        profileLi.style.display = 'none';
+
         ordersLi.style.display = 'none';
-        
+
         signoutLink.style.display = 'none';
         loginLink.style.display = 'flex';
     }
@@ -120,18 +120,18 @@ checkSession()
 document.getElementById("signout-link")?.addEventListener('click', signoutfunc)
 
 export async function updateCartCount() {
-    const {session: getSession} = await session();
+    const { session: getSession } = await session();
     if (getSession) {
-        
+
         const cartUserEmail = getSession.user.email;
         const allCart = JSON.parse(localStorage.getItem('cartItems')) || [];
         const cart = allCart.filter(item => item.email == cartUserEmail);
         const totalItems = cart.length;
-        
+
         if (cartCountElement) {
             cartCountElement.textContent = totalItems;
             // Show the badge only if there are items in the cart
-            cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none'; 
+            cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none';
         }
     }
 }

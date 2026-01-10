@@ -27,15 +27,17 @@
         </div>
         <div class="header-right">
             <button id="search-toggle" class="icon-button" aria-label="Search"><i class="fas fa-search"></i></button>
-            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-badge" style="display: none;">0</span>      
+            <a class="icon-button cart-icon" href="./cart.html" aria-label="Shopping Cart"><i
+                    class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
-            </div>
+        </div>
     </header>
 
     <section id="search-bar-section" class="search-bar-section animate__animated">
         <div class="search-container">
-            <input type="text" placeholder="Search products, collections, and more..." class="search-input" id="search-input">
+            <input type="text" placeholder="Search products, collections, and more..." class="search-input"
+                id="search-input">
             <button class="search-submit" aria-label="Submit Search"><i class="fas fa-arrow-right"></i></button>
             <button id="close-search" class="close-search" aria-label="Close Search"><i
                     class="fas fa-times"></i></button>
@@ -61,8 +63,8 @@
             </li>
             <hr>
             <li><a href="./index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#about"><i class="fas fa-info-circle"></i>About Us</a></li>
-            <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+            <li><a href="./about.html"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="./contact.html"><i class="fas fa-headset"></i> Contact</a></li>
         </ul>
         <div id="auth-footer" class="auth-footer">
             <a id="login-link" href="./login.html" class="auth-footer-link login-link"><i
@@ -100,7 +102,12 @@
             <div class="products_heading">
                 Featured Products
             </div>
-            <div id="products_div"></div>
+            <div id="products_div">
+                <div id="orders-loader" class="page-state loading-state" style="display: flex; flex-direction: column; justify-content: last baseline; align-items: center;">
+                    <div class="spinner"></div>
+                    <p class="loader-text">Fetching  products...</p>
+                </div>
+            </div>
         </div>
     </article>
     <!-- Footer -->
@@ -130,7 +137,7 @@
                     <h4>Company</h4>
                     <ul>
                         <li><a href="./about.html">About Us</a></li>
-                        <li><a href="#">Contact US</a></li>
+                        <li><a href="./contact.html">Contact US</a></li>
 
                     </ul>
                 </div>

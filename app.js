@@ -3,7 +3,7 @@
 // ----- Link: dealio-site.netlify.app ---
 
 // --------- Supabase Client Import  -----------
-import { supabaseclient, session } from './database.js'
+import { supabaseclient, session, deletefunc } from './database.js'
 import { updateCartCount } from './navbar.js'
 
 
@@ -26,6 +26,7 @@ async function getFeaturedProducts() {
     console.log(products);
 
     const products_div = document.getElementById("products_div")
+    products_div.innerHTML = ""
     for (let i = 0; i < products.length; i++) {
       products_div.innerHTML += `
       <div class="product">
@@ -167,6 +168,7 @@ async function getProductsbyCategory() {
 
       category_products_heading.innerText = name
       breadcrumb_item_active.innerText = name
+      categoryProductsDiv.innerHTML = ""; 
       for (let i = 0; i < data.length; i++) {
         categoryProductsDiv.innerHTML += `
         <div class="CategoryProducts">
@@ -512,15 +514,15 @@ document.addEventListener('DOMContentLoaded', () => {
  * @param {string} overlayId - The ID of the modal overlay element.
  */
 function showCustomModal(overlayId) {
-    const modalOverlay = document.getElementById(overlayId);
-    if (modalOverlay) {
-        // Set display property first so the element becomes visible before the transition starts
-        modalOverlay.style.display = 'flex'; 
-        // Force reflow to ensure display change is registered before transition
-        void modalOverlay.offsetWidth; 
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; 
-    }
+  const modalOverlay = document.getElementById(overlayId);
+  if (modalOverlay) {
+    // Set display property first so the element becomes visible before the transition starts
+    modalOverlay.style.display = 'flex';
+    // Force reflow to ensure display change is registered before transition
+    void modalOverlay.offsetWidth;
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 /**
@@ -528,52 +530,52 @@ function showCustomModal(overlayId) {
  * @param {string} overlayId - The ID of the modal overlay element.
  */
 function hideCustomModal(overlayId) {
-    const modalOverlay = document.getElementById(overlayId);
-    if (modalOverlay) {
-        modalOverlay.classList.remove('active');
-        
-        // Wait for the CSS transition (0.3s) to finish before hiding the element completely
-        modalOverlay.addEventListener('transitionend', function handler() {
-            if (!modalOverlay.classList.contains('active')) {
-                modalOverlay.style.display = 'none';
-                document.body.style.overflow = ''; 
-                modalOverlay.removeEventListener('transitionend', handler);
-            }
-        });
-    }
+  const modalOverlay = document.getElementById(overlayId);
+  if (modalOverlay) {
+    modalOverlay.classList.remove('active');
+
+    // Wait for the CSS transition (0.3s) to finish before hiding the element completely
+    modalOverlay.addEventListener('transitionend', function handler() {
+      if (!modalOverlay.classList.contains('active')) {
+        modalOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+        modalOverlay.removeEventListener('transitionend', handler);
+      }
+    });
+  }
 }
 
 /**
  * Attaches listeners to the modal closing elements (close buttons and overlay).
  */
 function attachModalCloseListeners(modalOverlayId) {
-    // 4. Attach Event Listeners for Modal HIDE (on close button or overlay click)
-    const modalOverlay = document.getElementById(modalOverlayId);
-    
-    // Attach to all close buttons
-    document.querySelectorAll('.btn-close-manual').forEach(el => {
-        el.addEventListener('click', () => {
-            hideCustomModal(modalOverlayId);
-        });
+  // 4. Attach Event Listeners for Modal HIDE (on close button or overlay click)
+  const modalOverlay = document.getElementById(modalOverlayId);
+
+  // Attach to all close buttons
+  document.querySelectorAll('.btn-close-manual').forEach(el => {
+    el.addEventListener('click', () => {
+      hideCustomModal(modalOverlayId);
+    });
+  });
+
+  // Attach to the overlay itself
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      // Check if the click target is the overlay itself, not a child element
+      if (e.target.id === modalOverlayId) {
+        hideCustomModal(modalOverlayId);
+      }
     });
 
-    // Attach to the overlay itself
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            // Check if the click target is the overlay itself, not a child element
-            if (e.target.id === modalOverlayId) {
-                hideCustomModal(modalOverlayId);
-            }
-        });
-
-        // Prevent clicks inside the modal content from bubbling up to the overlay and closing it
-        const modalContent = document.getElementById('orderDetailsModal');
-        if (modalContent) {
-            modalContent.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
+    // Prevent clicks inside the modal content from bubbling up to the overlay and closing it
+    const modalContent = document.getElementById('orderDetailsModal');
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     }
+  }
 }
 // --- END CUSTOM MODAL LOGIC ---
 
@@ -583,94 +585,94 @@ function attachModalCloseListeners(modalOverlayId) {
  * @param {string} state - The desired state ('loading', 'signin', 'noorders', 'content').
  */
 function renderOrderPageState(state) {
-    const loader = document.getElementById('orders-loader');
-    const container = document.getElementById('orders-container');
-    const signIn = document.getElementById('orders-signin-state');
-    const noOrders = document.getElementById('orders-no-orders-state');
+  const loader = document.getElementById('orders-loader');
+  const container = document.getElementById('orders-container');
+  const signIn = document.getElementById('orders-signin-state');
+  const noOrders = document.getElementById('orders-no-orders-state');
 
-    [loader, container, signIn, noOrders].forEach(el => {
-        if (el) el.style.display = 'none';
-    });
+  [loader, container, signIn, noOrders].forEach(el => {
+    if (el) el.style.display = 'none';
+  });
 
-    if (state === 'loading' && loader) {
-        loader.style.display = 'block';
-    } else if (state === 'signin' && signIn) {
-        signIn.style.display = 'block';
-    } else if (state === 'noorders' && noOrders) {
-        noOrders.style.display = 'block';
-    } else if (state === 'content' && container) {
-        container.style.display = 'grid'; 
-    }
+  if (state === 'loading' && loader) {
+    loader.style.display = 'block';
+  } else if (state === 'signin' && signIn) {
+    signIn.style.display = 'block';
+  } else if (state === 'noorders' && noOrders) {
+    noOrders.style.display = 'block';
+  } else if (state === 'content' && container) {
+    container.style.display = 'grid';
+  }
 }
 
 // Function to map status to CSS class for styling
 function getStatusBadgeClass(status) {
-    status = status.toLowerCase();
-    if (status === 'pending') return 'status-badge-pending';
-    if (status === 'processing') return 'status-badge-processing';
-    if (status === 'shipped') return 'status-badge-shipped';
-    if (status === 'delivered') return 'status-badge-delivered';
-    if (status === 'cancelled') return 'status-badge-cancelled';
-    return 'status-badge-secondary';
+  status = status.toLowerCase();
+  if (status === 'pending') return 'status-badge-pending';
+  if (status === 'processing') return 'status-badge-processing';
+  if (status === 'shipped') return 'status-badge-shipped';
+  if (status === 'delivered') return 'status-badge-delivered';
+  if (status === 'cancelled') return 'status-badge-cancelled';
+  return 'status-badge-secondary';
 }
 
 
 async function getOrders() {
-    const ordersContainer = document.getElementById('orders-container');
-    
-    const modalBody = document.getElementById('order-modal-body');
-    const modalOverlayId = 'orderDetailsModalOverlay'; 
+  const ordersContainer = document.getElementById('orders-container');
 
-    if (window.location.pathname.indexOf("/myorders") === -1) {
-        return; 
+  const modalBody = document.getElementById('order-modal-body');
+  const modalOverlayId = 'orderDetailsModalOverlay';
+
+  if (window.location.pathname.indexOf("/myorders") === -1) {
+    return;
+  }
+
+  // IMPORTANT: Attach close listeners immediately, as the modal structure is static HTML
+  attachModalCloseListeners(modalOverlayId);
+
+  renderOrderPageState('loading');
+
+  try {
+    const { session: getSession } = await session();
+    const user = getSession?.user;
+
+    if (!user) {
+      renderOrderPageState('signin');
+      return;
     }
 
-    // IMPORTANT: Attach close listeners immediately, as the modal structure is static HTML
-    attachModalCloseListeners(modalOverlayId);
+    // --- Supabase Data Fetching Logic ---
+    const { data: orders, error } = await supabaseclient
+      .from('orders')
+      .select('*')
+      .eq('user_email', user.email)
+      .order('created_at', { ascending: false });
 
-    renderOrderPageState('loading'); 
+    if (error) {
+      console.error('Error fetching orders:', error);
+      ordersContainer.innerHTML = '<p class="error-message">An unexpected error occurred. Please try again.</p>';
+      renderOrderPageState('content');
+      return;
+    }
 
-    try {
-        const { session: getSession } = await session(); 
-        const user = getSession?.user;
+    if (orders.length === 0) {
+      renderOrderPageState('noorders');
+      return;
+    }
 
-        if (!user) {
-            renderOrderPageState('signin');
-            return;
-        }
+    // 2. Render Orders List
+    let ordersHtml = '';
+    orders.forEach(order => {
+      const date = new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      const status = order.status || 'Pending';
+      const statusClass = getStatusBadgeClass(status);
+      const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
 
-        // --- Supabase Data Fetching Logic ---
-        const { data: orders, error } = await supabaseclient 
-            .from('orders')
-            .select('*') 
-            .eq('user_email', user.email) 
-            .order('created_at', { ascending: false });
+      const items = JSON.parse(order.items || '[]');
+      const itemsSummary = items.slice(0, 2).map(item => item.title).join(', ');
+      const moreItemsCount = items.length > 2 ? `... (+${items.length - 2} items)` : '';
 
-        if (error) {
-            console.error('Error fetching orders:', error);
-            ordersContainer.innerHTML = '<p class="error-message">An unexpected error occurred. Please try again.</p>';
-            renderOrderPageState('content'); 
-            return;
-        }
-
-        if (orders.length === 0) {
-            renderOrderPageState('noorders');
-            return;
-        }
-
-        // 2. Render Orders List
-        let ordersHtml = '';
-        orders.forEach(order => {
-            const date = new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-            const status = order.status || 'Pending';
-            const statusClass = getStatusBadgeClass(status);
-            const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
-            
-            const items = JSON.parse(order.items || '[]');
-            const itemsSummary = items.slice(0, 2).map(item => item.title).join(', ');
-            const moreItemsCount = items.length > 2 ? `... (+${items.length - 2} items)` : '';
-
-            ordersHtml += `
+      ordersHtml += `
                 <div class="order-card-v2">
                     <div class="order-header-v2">
                         <span>Order #${order.order_id.substring(0, 8).toUpperCase()}</span>
@@ -682,57 +684,58 @@ async function getOrders() {
 
                     <div class="order-footer-v2">
                         <span class="order-total-v2">$${total}</span>
-                        <button class="custom-button outline-primary-button order-view-details-btn" data-order="${order.order_id}">
+                        <button class="custom-button outline-primary-button order-view-details-btn" data-order=${order.order_id}>
                             <i class="fas fa-eye"></i>View Details
                         </button>
                     </div>
                 </div>
             `;
-        });
+    });
 
-        ordersContainer.innerHTML = ordersHtml;
-        renderOrderPageState('content'); 
+    ordersContainer.innerHTML = ordersHtml;
+    renderOrderPageState('content');
 
-        // 3. Attach Event Listeners for Modal SHOW
-        document.querySelectorAll('.order-view-details-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const orderId = e.currentTarget.getAttribute('data-order-id');
-                const selectedOrder = orders.find(o => o.order_id === orderId);
+    // 3. Attach Event Listeners for Modal SHOW
+    document.querySelectorAll('.order-view-details-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const orderId = e.currentTarget.getAttribute("data-order")
+        const selectedOrder = orders.find(o => JSON.parse(o.order_id) === orderId);
+        console.log(orderId, selectedOrder)
 
-                if (selectedOrder) {
-                    populateOrderModal(selectedOrder, modalBody);
-                    showCustomModal(modalOverlayId);
-                }
-            });
-        });
-        
-    } catch (e) {
-        console.error("Critical error in getOrders:", e);
-        ordersContainer.innerHTML = '<p class="error-message">A critical error occurred while loading your orders.</p>';
-        renderOrderPageState('content');
-    }
+        if (selectedOrder) {
+          populateOrderModal(selectedOrder, modalBody);
+          showCustomModal(modalOverlayId);
+        }
+      });
+    });
+
+  } catch (e) {
+    console.error("Critical error in getOrders:", e);
+    ordersContainer.innerHTML = '<p class="error-message">A critical error occurred while loading your orders.</p>';
+    renderOrderPageState('content');
+  }
 }
 
 /**
  * Populates the Order Details Modal with specific order information.
  */
 function populateOrderModal(order, modalBody) {
-    const status = order.status || 'Pending';
-    const statusClass = getStatusBadgeClass(status);
-    
-    const date = new Date(order.created_at).toLocaleDateString('en-US', { dateStyle: 'full' });
-    const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
+  const status = order.status || 'Pending';
+  const statusClass = getStatusBadgeClass(status);
 
-    const items = JSON.parse(order.items || '[]');
-    let itemsHtml = items.map(item => `
+  const date = new Date(order.created_at).toLocaleDateString('en-US', { dateStyle: 'full' });
+  const total = order.total_amount ? order.total_amount.toFixed(2) : '0.00';
+
+  const items = JSON.parse(order.items || '[]');
+  let itemsHtml = items.map(item => `
         <div class="modal-order-item">
             <span class="item-name">${item.title}</span>
             <span class="item-quantity text-muted">Qty: ${item.quantity}</span>
             <span class="item-price">${(item.price * item.quantity).toFixed(2)}</span>
         </div>
     `).join('');
-
-    modalBody.innerHTML = `
+  const info = JSON.parse(order.buyer_info);
+  modalBody.innerHTML = `
         <div class="modal-order-details-summary">
             <div class="col-left">
                 <p>Order ID</p>
@@ -753,11 +756,20 @@ function populateOrderModal(order, modalBody) {
 
         <h6><i class="fas fa-map-marker-alt"></i>Shipping Address</h6>
         <div class="shipping-address-box">
-            <p>${order.shipping_address?.name || 'N/A'}</p>
-            <p>${order.shipping_address?.street || 'N/A'}, ${order.shipping_address?.city || 'N/A'}</p>
-            <p>${order.shipping_address?.state || 'N/A'} - ${order.shipping_address?.zip_code || 'N/A'}, ${order.shipping_address?.country || 'N/A'}</p>
+            <p>${info.firstName + info.lastName || 'N/A'}</p>
+            <p>${info.address1 || 'N/A'}, ${info.city || 'N/A'}</p>
+            <p>${info.state || 'N/A'} - ${info.zipCode || 'N/A'}, ${info.country || 'N/A'}</p>
         </div>
+        <div>
+        <button id="cancelBtn">Cancel Order</button>
+        </div>
+        
     `;
+  document.getElementById(`cancelBtn`).addEventListener("click",() => {
+    deletefunc(order.id)
+    window.location.reload()
+  })
+
 }
 
 // Call the function for the My Orders page
